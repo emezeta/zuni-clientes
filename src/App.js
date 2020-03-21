@@ -1,5 +1,7 @@
 import React, { useRef } from 'react'
 
+import { isEmpty } from './helpers'
+
 import useProducts from './hooks/useProducts'
 import useClient from './hooks/useClient'
 import useDelivery from './hooks/useDelivery'
@@ -16,7 +18,14 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css'
 
 const App = () => {
-  const { client, changeName, changePhone, changeAddress } = useClient()
+  const {
+    client,
+    changeName,
+    changePhone,
+    changeAddress,
+    validateClient,
+    clientErrors,
+  } = useClient()
 
   const {
     products,
@@ -32,6 +41,8 @@ const App = () => {
     changePayment,
     changeNotes,
     resetDelivery,
+    validateDelivery,
+    deliveryErrors,
   } = useDelivery()
 
   const handleNewProduct = async () => {
@@ -49,7 +60,23 @@ const App = () => {
 
   const makeOrder = useSubmit()
 
+  const validate = () => {
+    const clientErrors = isEmpty(validateClient())
+    const deliveryErrors = isEmpty(validateDelivery())
+    return clientErrors && deliveryErrors
+  }
+
   const handleSubmit = async () => {
+    if (!validate()) {
+      window.alert('Hay campos requeridos sin completar')
+      return
+    }
+
+    if (!products.length) {
+      window.alert('Agregue al menos un producto')
+      return
+    }
+
     if (await makeOrder({ products, client, delivery })) {
       window.alert('La orden fue recibida correctamente!')
       resetProducts()
@@ -71,6 +98,7 @@ const App = () => {
           <div className="row my-4 align-items-stretch">
             <div className="col-12 col-md-6 d-flex py-2">
               <ClientBox
+                errors={clientErrors}
                 client={client}
                 changeName={changeName}
                 changePhone={changePhone}
@@ -79,6 +107,7 @@ const App = () => {
             </div>
             <div className="col-12 col-md-6 py-2">
               <DeliveryBox
+                errors={deliveryErrors}
                 delivery={delivery}
                 changePayment={changePayment}
                 changeDate={changeDate}

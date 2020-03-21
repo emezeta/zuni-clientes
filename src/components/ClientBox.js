@@ -10,6 +10,7 @@ const ClientBox = ({
   changeName,
   changePhone,
   changeAddress,
+  errors,
 }) => (
   <div
     className={cn(
@@ -19,12 +20,14 @@ const ClientBox = ({
   >
     <span className="align-self-center">Información del cliente</span>
     <TextField
+      error={errors.name}
       value={client.name}
       onChange={e => changeName(e.target.value)}
       className="my-2"
       label="Nombre*"
     />
     <TextField
+      error={errors.phone}
       value={client.phone}
       onChange={e => changePhone(e.target.value)}
       className="my-2"
@@ -32,6 +35,7 @@ const ClientBox = ({
       type="number"
     />
     <TextField
+      error={errors.address}
       value={client.address}
       onChange={e => changeAddress(e.target.value)}
       className="my-2"

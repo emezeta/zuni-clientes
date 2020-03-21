@@ -20,6 +20,7 @@ const DeliveryBox = ({
   changeDate,
   changeNotes,
   changePayment,
+  errors,
 }) => (
   <div
     className={cn(
@@ -30,6 +31,7 @@ const DeliveryBox = ({
     <span className="align-self-center">Información de la entrega</span>
     <MuiPickersUtilsProvider utils={DateUtils}>
       <KeyboardDatePicker
+        error={errors.date}
         margin="normal"
         id="date-picker-dialog"
         label="Fecha*"
@@ -42,6 +44,7 @@ const DeliveryBox = ({
       />
 
       <KeyboardTimePicker
+        error={errors.date}
         margin="normal"
         id="time-picker"
         label="Horario preferido*"
@@ -56,6 +59,7 @@ const DeliveryBox = ({
       <FormControl>
         <InputLabel id="payment">Método de pago*</InputLabel>
         <Select
+          error={errors.payment}
           labelId="payment"
           value={delivery.payment}
           onChange={e => changePayment(e.target.value)}

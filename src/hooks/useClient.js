@@ -9,6 +9,7 @@ const emptyClient = {
 
 export default () => {
   const [client, setClient] = useState(emptyClient)
+  const [clientErrors, setErrors] = useState({})
 
   const mutateClient = fn => setClient(produce(client, fn))
 
@@ -21,5 +22,21 @@ export default () => {
   const changeAddress = newAddress =>
     mutateClient(draft => void (draft.address = newAddress))
 
-  return { client, changePhone, changeName, changeAddress }
+  const validateClient = () => {
+    const newErrors = {}
+    !client.name && (newErrors.name = true)
+    !client.phone && (newErrors.phone = true)
+    !client.address && (newErrors.address = true)
+    setErrors(newErrors)
+    return newErrors
+  }
+
+  return {
+    client,
+    changePhone,
+    changeName,
+    changeAddress,
+    validateClient,
+    clientErrors,
+  }
 }
