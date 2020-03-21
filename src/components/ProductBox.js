@@ -5,7 +5,7 @@ import cn from 'classnames'
 
 import TextField from '@material-ui/core/TextField'
 
-function ProductBox({ className, index, onDelete, product, onChange }, ref) {
+const ProductBox = ({ className, index, onDelete, product, onChange }, ref) => {
   const handleDelete = () =>
     window.confirm(`Quiere borrar el producto ${index + 1}?`) && onDelete()
 
