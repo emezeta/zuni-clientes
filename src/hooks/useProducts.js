@@ -3,8 +3,8 @@ import produce from 'immer'
 
 const emptyProduct = {
   name: '',
-  phone: '',
-  address: '',
+  amount: 1,
+  description: '',
 }
 
 export default () => {

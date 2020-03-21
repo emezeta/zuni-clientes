@@ -2,7 +2,7 @@ import React from 'react'
 
 import cn from 'classnames'
 
-import Input from '@material-ui/core/Input'
+import TextField from '@material-ui/core/TextField'
 
 function ClientBox({
   className,
@@ -19,23 +19,21 @@ function ClientBox({
       )}
     >
       <span className="align-self-center">Información del cliente</span>
-      <Input
+      <TextField
         onChange={e => changeName(e.target.value)}
         className="my-2"
-        placeholder="Nombre*"
-        d="my-input"
+        label="Nombre*"
       />
-      <Input
+      <TextField
         onChange={e => changePhone(e.target.value)}
         className="my-2"
-        placeholder="Telefono*"
-        d="my-input"
+        label="Telefono*"
+        type="number"
       />
-      <Input
+      <TextField
         onChange={e => changeAddress(e.target.value)}
         className="my-2"
-        placeholder="Dirección*"
-        d="my-input"
+        label="Dirección*"
       />
     </div>
   )
