@@ -13,5 +13,7 @@ export default () => {
   const changePayment = payment => setDelivery({ ...delivery, payment })
   const changeNotes = notes => setDelivery({ ...delivery, notes })
 
-  return { delivery, changeDate, changePayment, changeNotes }
+  const resetDelivery = () => setDelivery(emptyDelivery)
+
+  return { delivery, changeDate, changePayment, changeNotes, resetDelivery }
 }

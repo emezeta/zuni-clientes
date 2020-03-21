@@ -21,5 +21,7 @@ export default () => {
   const changeProduct = (index, product) =>
     mutateProducts(draft => void (draft[index] = product))
 
-  return { products, newProduct, removeProduct, changeProduct }
+  const resetProducts = () => setProducts([])
+
+  return { products, newProduct, removeProduct, changeProduct, resetProducts }
 }

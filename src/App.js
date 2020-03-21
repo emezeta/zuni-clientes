@@ -3,6 +3,7 @@ import React, { useRef } from 'react'
 import useProducts from './hooks/useProducts'
 import useClient from './hooks/useClient'
 import useDelivery from './hooks/useDelivery'
+import useSubmit from './hooks/useSubmit'
 
 import ClientBox from './components/ClientBox'
 import DeliveryBox from './components/DeliveryBox'
@@ -13,9 +14,23 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css'
 
 function App() {
-  const { products, newProduct, removeProduct, changeProduct } = useProducts()
   const { client, changeName, changePhone, changeAddress } = useClient()
-  const { delivery, changeDate, changePayment, changeNotes } = useDelivery()
+
+  const {
+    products,
+    newProduct,
+    removeProduct,
+    changeProduct,
+    resetProducts,
+  } = useProducts()
+
+  const {
+    delivery,
+    changeDate,
+    changePayment,
+    changeNotes,
+    resetDelivery,
+  } = useDelivery()
 
   const handleNewProduct = async () => {
     await newProduct()
@@ -29,6 +44,18 @@ function App() {
       behavior: 'smooth',
       block: 'start',
     })
+
+  const makeOrder = useSubmit()
+
+  const handleSubmit = async () => {
+    if (await makeOrder({ products, client, delivery })) {
+      window.alert('La orden fue recibida correctamente!')
+      resetProducts()
+      resetDelivery()
+    } else {
+      window.alert('Hubo un error, por favor intente nuevamente')
+    }
+  }
 
   return (
     <div
@@ -65,10 +92,7 @@ function App() {
           />
         ))}
       </div>
-      <Footer
-        newProduct={handleNewProduct}
-        submit={() => console.log({ delivery, products, client })}
-      />
+      <Footer newProduct={handleNewProduct} submit={handleSubmit} />
     </div>
   )
 }
