@@ -32,7 +32,7 @@ const DeliveryBox = ({
       <KeyboardDatePicker
         margin="normal"
         id="date-picker-dialog"
-        label="Fecha"
+        label="Fecha*"
         format="DD/MM/YYYY"
         value={delivery.date}
         onChange={changeDate}
@@ -46,7 +46,7 @@ const DeliveryBox = ({
         id="time-picker"
         label="Horario preferido*"
         className="my-2"
-        value={delivery.time}
+        value={delivery.date}
         onChange={changeDate}
         KeyboardButtonProps={{
           'aria-label': 'change time',
