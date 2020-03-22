@@ -87,7 +87,10 @@ const App = () => {
       return
     }
 
-    window.confirm('Desea finalizar la compra?')
+    if (!window.confirm('Desea finalizar la compra?')) {
+      setButtonsDisabled(false)
+      return
+    }
 
     if (await makeOrder({ products, client, delivery })) {
       window.alert('La orden fue recibida correctamente!')
