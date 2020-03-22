@@ -2,8 +2,11 @@ import { useState, useCallback } from 'react'
 
 import { isEmpty } from '../helpers'
 
+const in3hours = new Date()
+in3hours.setHours(in3hours.getHours() + 3)
+
 const emptyDelivery = {
-  date: null,
+  date: in3hours,
   payment: '',
   notes: '',
 }
