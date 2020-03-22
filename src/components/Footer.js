@@ -2,7 +2,7 @@ import React, { memo } from 'react'
 
 import Button from '@material-ui/core/Button'
 
-const Footer = ({ newProduct, submit }) => (
+const Footer = ({ newProduct, submit, disabled }) => (
   <div
     className="mt-auto mb-4 d-flex align-items-center py-2 rounded"
     style={{
@@ -11,6 +11,7 @@ const Footer = ({ newProduct, submit }) => (
     }}
   >
     <Button
+      disabled={disabled}
       onClick={newProduct}
       className="col mr-1 mr-md-3 py-md-4"
       variant="contained"
@@ -19,6 +20,7 @@ const Footer = ({ newProduct, submit }) => (
       AGREGAR PRODUCTO
     </Button>
     <Button
+      disabled={disabled}
       onClick={submit}
       className="col ml-1 ml-md-3 py-md-4"
       variant="contained"

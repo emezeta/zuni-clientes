@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 
 import useProducts from './hooks/useProducts'
 import useClient from './hooks/useClient'
@@ -17,6 +17,8 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css'
 
 const App = () => {
+  const [buttonsDisabled, setButtonsDisabled] = useState()
+
   const {
     client,
     changeName,
@@ -72,13 +74,16 @@ const App = () => {
   }
 
   const handleSubmit = async () => {
+    setButtonsDisabled(true)
     if (!products.length) {
       window.alert('Agregue al menos un producto')
+      setButtonsDisabled(false)
       return
     }
 
     if (!valid()) {
       window.alert('Hay campos requeridos sin completar')
+      setButtonsDisabled(false)
       return
     }
 
@@ -89,6 +94,7 @@ const App = () => {
     } else {
       window.alert('Hubo un error, por favor intente nuevamente')
     }
+    setButtonsDisabled(false)
   }
 
   return (
@@ -137,7 +143,11 @@ const App = () => {
             ))}
           </div>
 
-          <Footer newProduct={handleNewProduct} submit={handleSubmit} />
+          <Footer
+            disabled={buttonsDisabled}
+            newProduct={handleNewProduct}
+            submit={handleSubmit}
+          />
         </div>
       </div>
     </>
