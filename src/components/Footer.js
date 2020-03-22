@@ -2,7 +2,7 @@ import React from 'react'
 
 import Button from '@material-ui/core/Button'
 
-const Footer = ({ newProduct, submit, className }) => (
+const Footer = ({ newProduct, submit }) => (
   <div
     className="mt-auto mb-4 d-flex align-items-center py-2 rounded"
     style={{

@@ -22,14 +22,14 @@ const ClientBox = ({
     <TextField
       error={errors.name}
       value={client.name}
-      onChange={e => changeName(e.target.value)}
+      onChange={(e) => changeName(e.target.value)}
       className="my-2"
       label="Nombre*"
     />
     <TextField
       error={errors.phone}
       value={client.phone}
-      onChange={e => changePhone(e.target.value)}
+      onChange={(e) => changePhone(e.target.value)}
       className="my-2"
       label="Telefono*"
       type="number"
@@ -37,7 +37,7 @@ const ClientBox = ({
     <TextField
       error={errors.address}
       value={client.address}
-      onChange={e => changeAddress(e.target.value)}
+      onChange={(e) => changeAddress(e.target.value)}
       className="my-2"
       label="Dirección*"
     />

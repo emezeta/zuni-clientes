@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Disclaimer = ({ newProduct, submit, className }) => (
+const Disclaimer = () => (
   <div
     className="d-flex justify-content-center py-2"
     style={{

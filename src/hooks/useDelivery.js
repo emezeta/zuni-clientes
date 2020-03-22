@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useCallback } from 'react'
 
 const emptyDelivery = {
   date: null,
@@ -10,9 +10,13 @@ export default () => {
   const [delivery, setDelivery] = useState(emptyDelivery)
   const [deliveryErrors, setErrors] = useState({})
 
-  const changeDate = date => setDelivery({ ...delivery, date })
-  const changePayment = payment => setDelivery({ ...delivery, payment })
-  const changeNotes = notes => setDelivery({ ...delivery, notes })
+  const changeDate = useCallback(
+    (date) => setDelivery({ ...delivery, date }),
+    []
+  )
+
+  const changePayment = (payment) => setDelivery({ ...delivery, payment })
+  const changeNotes = (notes) => setDelivery({ ...delivery, notes })
 
   const resetDelivery = () => setDelivery(emptyDelivery)
 

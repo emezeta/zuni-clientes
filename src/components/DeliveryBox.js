@@ -62,8 +62,7 @@ const DeliveryBox = ({
           error={errors.payment}
           labelId="payment"
           value={delivery.payment}
-          onChange={e => changePayment(e.target.value)}
-          className="my-2"
+          onChange={(e) => changePayment(e.target.value)}
         >
           <MenuItem value="cash">Efectivo</MenuItem>
           <MenuItem value="pos">POS móvil (en la entrega)</MenuItem>
@@ -73,9 +72,9 @@ const DeliveryBox = ({
 
       <TextField
         value={delivery.notes}
-        onChange={e => changeNotes(e.target.value)}
+        onChange={(e) => changeNotes(e.target.value)}
         className="my-2"
-        label="Notas*"
+        label="Notas"
       />
     </MuiPickersUtilsProvider>
   </div>

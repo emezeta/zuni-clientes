@@ -67,13 +67,13 @@ const App = () => {
   }
 
   const handleSubmit = async () => {
-    if (!validate()) {
-      window.alert('Hay campos requeridos sin completar')
+    if (!products.length) {
+      window.alert('Agregue al menos un producto')
       return
     }
 
-    if (!products.length) {
-      window.alert('Agregue al menos un producto')
+    if (!validate()) {
+      window.alert('Hay campos requeridos sin completar')
       return
     }
 
@@ -118,7 +118,7 @@ const App = () => {
               <div key={index} className="col-12 col-md-4">
                 <ProductBox
                   product={product}
-                  onChange={newProduct => changeProduct(index, newProduct)}
+                  onChange={(newProduct) => changeProduct(index, newProduct)}
                   onDelete={() => removeProduct(index)}
                   ref={index === products.length - 1 ? lastProductRef : null}
                   className="my-2"
@@ -127,6 +127,7 @@ const App = () => {
               </div>
             ))}
           </div>
+
           <Footer newProduct={handleNewProduct} submit={handleSubmit} />
         </div>
       </div>

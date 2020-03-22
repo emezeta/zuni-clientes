@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useCallback } from 'react'
 import produce from 'immer'
 
 const emptyProduct = {
@@ -10,18 +10,46 @@ const emptyProduct = {
 export default () => {
   const [products, setProducts] = useState([])
 
-  const mutateProducts = fn => setProducts(produce(products, fn))
+  const mutateProducts = (fn) => setProducts(produce(products, fn))
 
-  const newProduct = () =>
-    mutateProducts(draft => void draft.push(emptyProduct))
+  const newProduct = useCallback(
+    () => mutateProducts((draft) => void draft.push(emptyProduct)),
+    []
+  )
 
-  const removeProduct = index =>
-    mutateProducts(draft => void draft.splice(index, 1))
+  const removeProduct = useCallback(
+    (index) => mutateProducts((draft) => void draft.splice(index, 1)),
+    []
+  )
 
-  const changeProduct = (index, product) =>
-    mutateProducts(draft => void (draft[index] = product))
+  const changeProduct = useCallback(
+    (index, product) =>
+      mutateProducts((draft) => void (draft[index] = product)),
+    []
+  )
 
-  const resetProducts = () => setProducts([])
+  const resetProducts = useCallback(() => setProducts([]), [])
 
-  return { products, newProduct, removeProduct, changeProduct, resetProducts }
+  const validateProducts = () => {
+    const newErrors = products.map(({ name, amount }) => {
+      const error = {}
+      if (!!name && !!error) return true
+      else {
+        !name && (error.name = true)
+        !amount && (error.amount = true)
+        return error
+      }
+    })
+
+    return newErrors
+  }
+
+  return {
+    products,
+    newProduct,
+    removeProduct,
+    changeProduct,
+    resetProducts,
+    validateProducts,
+  }
 }
