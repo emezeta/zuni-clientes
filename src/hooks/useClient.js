@@ -1,5 +1,6 @@
-import { useState } from 'react'
-import produce from 'immer'
+import { useState, useCallback } from 'react'
+
+import { isEmpty } from '../helpers'
 
 const emptyClient = {
   name: '',
@@ -11,25 +12,27 @@ export default () => {
   const [client, setClient] = useState(emptyClient)
   const [clientErrors, setErrors] = useState({})
 
-  const mutateClient = (fn) => setClient(produce(client, fn))
+  const changeName = useCallback((name) => setClient({ ...client, name }), [
+    client,
+  ])
 
-  const changeName = (newName) =>
-    mutateClient((draft) => void (draft.name = newName))
+  const changePhone = useCallback((phone) => setClient({ ...client, phone }), [
+    client,
+  ])
 
-  const changePhone = (newPhone) =>
-    mutateClient((draft) => void (draft.phone = newPhone))
+  const changeAddress = useCallback(
+    (address) => setClient({ ...client, address }),
+    [client]
+  )
 
-  const changeAddress = (newAddress) =>
-    mutateClient((draft) => void (draft.address = newAddress))
-
-  const validateClient = () => {
+  const validateClient = useCallback(() => {
     const newErrors = {}
     !client.name && (newErrors.name = true)
     !client.phone && (newErrors.phone = true)
     !client.address && (newErrors.address = true)
     setErrors(newErrors)
-    return newErrors
-  }
+    return isEmpty(newErrors)
+  }, [client])
 
   return {
     client,

@@ -1,5 +1,7 @@
 import { useState, useCallback } from 'react'
 
+import { isEmpty } from '../helpers'
+
 const emptyDelivery = {
   date: null,
   payment: '',
@@ -10,24 +12,28 @@ export default () => {
   const [delivery, setDelivery] = useState(emptyDelivery)
   const [deliveryErrors, setErrors] = useState({})
 
-  const changeDate = useCallback(
-    (date) => setDelivery({ ...delivery, date }),
-    []
+  const changeDate = useCallback((date) => setDelivery({ ...delivery, date }), [
+    delivery,
+  ])
+
+  const changePayment = useCallback(
+    (payment) => setDelivery({ ...delivery, payment }),
+    [delivery]
+  )
+  const changeNotes = useCallback(
+    (notes) => setDelivery({ ...delivery, notes }),
+    [delivery]
   )
 
-  const changePayment = (payment) => setDelivery({ ...delivery, payment })
-  const changeNotes = (notes) => setDelivery({ ...delivery, notes })
+  const resetDelivery = useCallback(() => setDelivery(emptyDelivery), [])
 
-  const resetDelivery = () => setDelivery(emptyDelivery)
-
-  const validateDelivery = () => {
+  const validateDelivery = useCallback(() => {
     const newErrors = {}
     !delivery.date && (newErrors.date = true)
     !delivery.payment && (newErrors.payment = true)
     setErrors(newErrors)
-    console.log(newErrors)
-    return newErrors
-  }
+    return isEmpty(newErrors)
+  }, [delivery])
 
   return {
     delivery,

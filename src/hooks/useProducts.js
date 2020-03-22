@@ -9,23 +9,27 @@ const emptyProduct = {
 
 export default () => {
   const [products, setProducts] = useState([])
+  const [productErrors, setErrors] = useState([])
 
-  const mutateProducts = (fn) => setProducts(produce(products, fn))
+  const mutateProducts = useCallback(
+    (fn) => setProducts(produce(products, fn)),
+    [products]
+  )
 
   const newProduct = useCallback(
     () => mutateProducts((draft) => void draft.push(emptyProduct)),
-    []
+    [mutateProducts]
   )
 
   const removeProduct = useCallback(
     (index) => mutateProducts((draft) => void draft.splice(index, 1)),
-    []
+    [mutateProducts]
   )
 
   const changeProduct = useCallback(
     (index, product) =>
       mutateProducts((draft) => void (draft[index] = product)),
-    []
+    [mutateProducts]
   )
 
   const resetProducts = useCallback(() => setProducts([]), [])
@@ -33,15 +37,15 @@ export default () => {
   const validateProducts = () => {
     const newErrors = products.map(({ name, amount }) => {
       const error = {}
-      if (!!name && !!error) return true
+      if (!!name && !!amount) return false
       else {
         !name && (error.name = true)
         !amount && (error.amount = true)
         return error
       }
     })
-
-    return newErrors
+    setErrors(newErrors)
+    return newErrors.every((error) => error === false)
   }
 
   return {
@@ -51,5 +55,6 @@ export default () => {
     changeProduct,
     resetProducts,
     validateProducts,
+    productErrors,
   }
 }

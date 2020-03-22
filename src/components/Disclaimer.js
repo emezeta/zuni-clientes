@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 
 const Disclaimer = () => (
   <div
@@ -14,4 +14,4 @@ const Disclaimer = () => (
   </div>
 )
 
-export default Disclaimer
+export default memo(Disclaimer)

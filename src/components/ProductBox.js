@@ -1,11 +1,14 @@
-import React, { forwardRef } from 'react'
+import React, { forwardRef, memo } from 'react'
 
 import Delete from '@material-ui/icons/Delete'
 import cn from 'classnames'
 
 import TextField from '@material-ui/core/TextField'
 
-const ProductBox = ({ className, index, onDelete, product, onChange }, ref) => {
+const ProductBox = (
+  { className, index, onDelete, product, onChange, errors },
+  ref
+) => {
   const handleDelete = () =>
     window.confirm(`Quiere borrar el producto ${index + 1}?`) && onDelete()
 
@@ -34,12 +37,14 @@ const ProductBox = ({ className, index, onDelete, product, onChange }, ref) => {
         />
       </div>
       <TextField
+        error={errors?.name}
         value={product.name}
         onChange={changeName}
         className="my-2"
         label="Nombre de producto*"
       />
       <TextField
+        error={errors?.amount}
         value={product.amount}
         onChange={changeAmount}
         className="my-2"
@@ -57,4 +62,4 @@ const ProductBox = ({ className, index, onDelete, product, onChange }, ref) => {
   )
 }
 
-export default forwardRef(ProductBox)
+export default memo(forwardRef(ProductBox))

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 
 import Button from '@material-ui/core/Button'
 
@@ -29,4 +29,4 @@ const Footer = ({ newProduct, submit }) => (
   </div>
 )
 
-export default Footer
+export default memo(Footer)

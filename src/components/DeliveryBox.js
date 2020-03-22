@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 
 import cn from 'classnames'
 
@@ -80,4 +80,4 @@ const DeliveryBox = ({
   </div>
 )
 
-export default DeliveryBox
+export default memo(DeliveryBox)

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 
 import cn from 'classnames'
 
@@ -44,4 +44,4 @@ const ClientBox = ({
   </div>
 )
 
-export default ClientBox
+export default memo(ClientBox)

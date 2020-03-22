@@ -1,11 +1,10 @@
 import React, { useRef } from 'react'
 
-import { isEmpty } from './helpers'
-
 import useProducts from './hooks/useProducts'
 import useClient from './hooks/useClient'
 import useDelivery from './hooks/useDelivery'
 import useSubmit from './hooks/useSubmit'
+import useScrollToError from './hooks/useScrollToError'
 
 import Disclaimer from './components/Disclaimer'
 import Header from './components/Header'
@@ -33,6 +32,8 @@ const App = () => {
     removeProduct,
     changeProduct,
     resetProducts,
+    validateProducts,
+    productErrors,
   } = useProducts()
 
   const {
@@ -51,6 +52,9 @@ const App = () => {
   }
 
   const lastProductRef = useRef()
+  const containerRef = useRef()
+
+  useScrollToError(containerRef, clientErrors, productErrors, productErrors)
 
   const scrollToBottom = () =>
     lastProductRef.current.scrollIntoView({
@@ -60,10 +64,11 @@ const App = () => {
 
   const makeOrder = useSubmit()
 
-  const validate = () => {
-    const clientErrors = isEmpty(validateClient())
-    const deliveryErrors = isEmpty(validateDelivery())
-    return clientErrors && deliveryErrors
+  const valid = () => {
+    const clientErrors = validateClient()
+    const deliveryErrors = validateDelivery()
+    const productErrors = validateProducts()
+    return clientErrors && deliveryErrors && productErrors
   }
 
   const handleSubmit = async () => {
@@ -72,7 +77,7 @@ const App = () => {
       return
     }
 
-    if (!validate()) {
+    if (!valid()) {
       window.alert('Hay campos requeridos sin completar')
       return
     }
@@ -94,7 +99,10 @@ const App = () => {
         style={{ background: 'lightgray', minHeight: '100%' }}
       >
         <Header />
-        <div className="container d-flex flex-grow-1 flex-column">
+        <div
+          ref={containerRef}
+          className="container d-flex flex-grow-1 flex-column"
+        >
           <div className="row my-4 align-items-stretch">
             <div className="col-12 col-md-6 d-flex py-2">
               <ClientBox
@@ -117,6 +125,7 @@ const App = () => {
             {products.map((product, index) => (
               <div key={index} className="col-12 col-md-4">
                 <ProductBox
+                  errors={productErrors[index]}
                   product={product}
                   onChange={(newProduct) => changeProduct(index, newProduct)}
                   onDelete={() => removeProduct(index)}

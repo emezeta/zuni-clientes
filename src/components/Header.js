@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { memo } from 'react'
 
 const Header = () => (
   <div className="d-flex justify-content-center">Zunimercado compras web</div>
 )
 
-export default Header
+export default memo(Header)
