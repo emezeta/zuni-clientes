@@ -87,6 +87,8 @@ const App = () => {
       return
     }
 
+    window.confirm('Desea finalizar la compra?')
+
     if (await makeOrder({ products, client, delivery })) {
       window.alert('La orden fue recibida correctamente!')
       resetProducts()
