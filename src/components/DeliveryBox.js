@@ -19,6 +19,7 @@ const DeliveryBox = ({
   delivery,
   changeDate,
   changeNotes,
+  changeAccount,
   changePayment,
   errors,
 }) => (
@@ -59,19 +60,34 @@ const DeliveryBox = ({
         }}
       />
 
-      <FormControl>
-        <InputLabel id="payment">Método de pago*</InputLabel>
-        <Select
-          error={errors.payment}
-          labelId="payment"
-          value={delivery.payment}
-          onChange={(e) => changePayment(e.target.value)}
+      <div className="">
+        <FormControl
+          className={delivery.payment === 'account' ? 'pr-2 w-50' : 'w-100'}
         >
-          <MenuItem value="cash">Efectivo</MenuItem>
-          <MenuItem value="pos">POS móvil (en la entrega)</MenuItem>
-          <MenuItem value="other">Otro (aclarar en notas)</MenuItem>
-        </Select>
-      </FormControl>
+          <InputLabel id="payment">Método de pago*</InputLabel>
+          <Select
+            error={errors.payment}
+            labelId="payment"
+            value={delivery.payment}
+            onChange={(e) => changePayment(e.target.value)}
+          >
+            <MenuItem value="cash">Efectivo</MenuItem>
+            <MenuItem value="pos">POS móvil (en la entrega)</MenuItem>
+            <MenuItem value="account">Cuenta cliente</MenuItem>
+            <MenuItem value="other">Otro (aclarar en notas)</MenuItem>
+          </Select>
+        </FormControl>
+
+        {delivery.payment === 'account' && (
+          <TextField
+            error={errors.account}
+            value={delivery.account}
+            onChange={(e) => changeAccount(e.target.value)}
+            className="w-50"
+            label="Número de cuenta*"
+          />
+        )}
+      </div>
 
       <TextField
         value={delivery.notes}

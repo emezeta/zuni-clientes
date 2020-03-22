@@ -9,6 +9,7 @@ const emptyDelivery = {
   date: in3hours,
   payment: '',
   notes: '',
+  account: '',
 }
 
 export default () => {
@@ -27,6 +28,10 @@ export default () => {
     (notes) => setDelivery({ ...delivery, notes }),
     [delivery]
   )
+  const changeAccount = useCallback(
+    (account) => setDelivery({ ...delivery, account }),
+    [delivery]
+  )
 
   const resetDelivery = useCallback(() => setDelivery(emptyDelivery), [])
 
@@ -34,6 +39,9 @@ export default () => {
     const newErrors = {}
     !delivery.date && (newErrors.date = true)
     !delivery.payment && (newErrors.payment = true)
+    delivery.payment === 'account' &&
+      !delivery.account &&
+      (newErrors.account = true)
     setErrors(newErrors)
     return isEmpty(newErrors)
   }, [delivery])
@@ -45,6 +53,7 @@ export default () => {
     changeNotes,
     resetDelivery,
     validateDelivery,
+    changeAccount,
     deliveryErrors,
   }
 }

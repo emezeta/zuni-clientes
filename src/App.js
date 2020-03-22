@@ -42,6 +42,7 @@ const App = () => {
     delivery,
     changeDate,
     changePayment,
+    changeAccount,
     changeNotes,
     resetDelivery,
     validateDelivery,
@@ -129,6 +130,7 @@ const App = () => {
                 errors={deliveryErrors}
                 delivery={delivery}
                 changePayment={changePayment}
+                changeAccount={changeAccount}
                 changeDate={changeDate}
                 changeNotes={changeNotes}
               />
