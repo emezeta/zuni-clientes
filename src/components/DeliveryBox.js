@@ -31,6 +31,7 @@ const DeliveryBox = ({
     <span className="align-self-center">Información de la entrega</span>
     <MuiPickersUtilsProvider utils={DateUtils}>
       <KeyboardDatePicker
+        disablePast
         error={errors.date}
         margin="normal"
         id="date-picker-dialog"
@@ -44,6 +45,8 @@ const DeliveryBox = ({
       />
 
       <KeyboardTimePicker
+        minutesStep={5}
+        disablePast
         error={errors.date}
         margin="normal"
         id="time-picker"
