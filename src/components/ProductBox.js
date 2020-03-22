@@ -49,7 +49,6 @@ const ProductBox = (
         onChange={changeAmount}
         className="my-2"
         label="Cantidad*"
-        type="number"
       />
       <TextField
         value={product.description}

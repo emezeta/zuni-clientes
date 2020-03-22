@@ -3,7 +3,7 @@ import produce from 'immer'
 
 const emptyProduct = {
   name: '',
-  amount: 1,
+  amount: '1',
   description: '',
 }
 
