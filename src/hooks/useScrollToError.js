@@ -2,7 +2,6 @@ import { useEffect } from 'react'
 
 export default (ref, ...errors) =>
   useEffect(() => {
-    console.log('scrolling')
     const invalidInput = ref.current.querySelector("input[aria-invalid='true']")
     void invalidInput?.scrollIntoView({
       behavior: 'smooth',
