@@ -107,8 +107,8 @@ const App = () => {
     <>
       <Disclaimer />
       <div
-        className="pt-4 d-flex flex-grow-1 flex-column"
-        style={{ background: 'lightgray', minHeight: '100%' }}
+        className="d-flex flex-grow-1 flex-column"
+        style={{ background: 'rgb(240,240,240)', minHeight: '100%' }}
       >
         <Header />
         <div

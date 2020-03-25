@@ -6,3 +6,13 @@ html, body, #root {
 .bg-white {
   background-color: white;
 }
+
+.shadow {
+  -webkit-box-shadow: 10px 10px 37px 0px rgba(0,0,28,1);
+  -moz-box-shadow: 10px 10px 37px 0px rgba(0,0,28,1);
+  box-shadow: 10px 10px 37px 0px rgba(0,0,28,1);
+}
+
+.opacity-2 {
+  opacity: 0.4;
+}

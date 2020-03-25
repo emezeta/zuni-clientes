@@ -24,7 +24,7 @@ const ProductBox = (
   return (
     <div
       className={cn(
-        'bg-white rounded px-4 pb-4 pt-3 d-flex flex-column',
+        'bg-white rounded px-4 pb-4 pt-3 d-flex flex-column shadow',
         className
       )}
       ref={ref}

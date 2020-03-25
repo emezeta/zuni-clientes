@@ -14,7 +14,7 @@ const ClientBox = ({
 }) => (
   <div
     className={cn(
-      'bg-white rounded px-4 pb-4 pt-3 d-flex flex-column flex-grow-1',
+      'bg-white rounded px-4 pb-4 pt-3 d-flex flex-column flex-grow-1 shadow',
       className
     )}
   >
