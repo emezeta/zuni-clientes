@@ -119,12 +119,9 @@ const App = () => {
   }
 
   return (
-    <>
+    <div className="min-vh-100 d-flex flex-column">
       <Disclaimer />
-      <div
-        className="d-flex flex-grow-1 flex-column"
-        style={{ background: 'rgb(240,240,240)', minHeight: '100%' }}
-      >
+      <div className="d-flex flex-grow-1 flex-column bg-gray">
         <Header />
         {loading ? (
           <Loader />
@@ -176,7 +173,7 @@ const App = () => {
           </div>
         )}
       </div>
-    </>
+    </div>
   )
 }
 
