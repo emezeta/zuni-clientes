@@ -15,8 +15,12 @@
     "dayjs": "^1.8.23",
     "immer": "^6.0.2",
     "react": "^16.13.1",
+    "react-alert": "^7.0.0",
+    "react-alert-template-basic": "^1.0.0",
+    "react-confirm-alert": "^2.6.1",
     "react-dom": "^16.13.1",
-    "react-scripts": "3.4.1"
+    "react-scripts": "3.4.1",
+    "react-spinners": "^0.8.1"
   },
   "scripts": {
     "start": "react-scripts start",
