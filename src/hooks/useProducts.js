@@ -1,5 +1,6 @@
 import { useState, useCallback } from 'react'
 import produce from 'immer'
+import { useAlert } from 'react-alert'
 
 const emptyProduct = {
   name: '',
@@ -10,6 +11,7 @@ const emptyProduct = {
 export default () => {
   const [products, setProducts] = useState([])
   const [productErrors, setErrors] = useState([])
+  const alert = useAlert()
 
   const validateProducts = useCallback(() => {
     const newErrors = products.map(({ name, amount }) => {
@@ -32,11 +34,11 @@ export default () => {
 
   const newProduct = useCallback(() => {
     if (!validateProducts()) {
-      window.alert('Completa un producto antes de agregar otro')
+      alert.show('Completa un producto antes de agregar otro')
       return
     }
     mutateProducts((draft) => void draft.push(emptyProduct))
-  }, [mutateProducts, validateProducts])
+  }, [mutateProducts, validateProducts, alert])
 
   const removeProduct = useCallback(
     (index) => mutateProducts((draft) => void draft.splice(index, 1)),

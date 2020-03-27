@@ -3,13 +3,7 @@ import React, { memo } from 'react'
 import Button from '@material-ui/core/Button'
 
 const Footer = ({ newProduct, submit, disabled }) => (
-  <div
-    className="mt-auto mb-4 d-flex align-items-center py-2 rounded"
-    style={{
-      position: 'sticky',
-      bottom: 0,
-    }}
-  >
+  <div className="mt-auto mb-4 d-flex align-items-center rounded">
     <Button
       disabled={disabled}
       onClick={newProduct}
