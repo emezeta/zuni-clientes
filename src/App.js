@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react'
 import { confirmAlert } from 'react-confirm-alert'
 import 'react-confirm-alert/src/react-confirm-alert.css'
 import { useAlert } from 'react-alert'
+import Button from '@material-ui/core/Button'
 
 import useProducts from './hooks/useProducts'
 import useClient from './hooks/useClient'
@@ -39,6 +40,7 @@ const App = () => {
     changeProduct,
     resetProducts,
     validateProducts,
+    repeatOrder,
     productErrors,
   } = useProducts()
 
@@ -150,6 +152,15 @@ const App = () => {
                   changeNotes={changeNotes}
                 />
               </div>
+              {window.localStorage.getItem('lastOrder') && !products.length && (
+                <Button
+                  variant="outlined"
+                  className="mx-auto mt-md-4 mt-4"
+                  onClick={repeatOrder}
+                >
+                  Repetir ultimo pedido
+                </Button>
+              )}
               {products.map((product, index) => (
                 <div key={index} className="col-12 col-md-4">
                   <ProductBox
