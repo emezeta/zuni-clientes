@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useEffect } from 'react'
 
 import { isEmpty } from '../helpers'
 
@@ -11,6 +11,11 @@ const emptyClient = {
 export default () => {
   const [client, setClient] = useState(emptyClient)
   const [clientErrors, setErrors] = useState({})
+
+  useEffect(() => {
+    const localClient = JSON.parse(window.localStorage.getItem('client'))
+    localClient && setClient(localClient)
+  }, [])
 
   const changeName = useCallback((name) => setClient({ ...client, name }), [
     client,

@@ -53,12 +53,18 @@ export default () => {
 
   const resetProducts = useCallback(() => setProducts([]), [])
 
+  const repeatOrder = useCallback(() => {
+    const lastOrder = JSON.parse(window.localStorage.getItem('lastOrder'))
+    setProducts(lastOrder)
+  }, [])
+
   return {
     products,
     newProduct,
     removeProduct,
     changeProduct,
     resetProducts,
+    repeatOrder,
     validateProducts,
     productErrors,
   }

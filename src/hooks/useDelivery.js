@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useEffect } from 'react'
 
 import { isEmpty } from '../helpers'
 
@@ -15,6 +15,11 @@ const emptyDelivery = {
 export default () => {
   const [delivery, setDelivery] = useState(emptyDelivery)
   const [deliveryErrors, setErrors] = useState({})
+
+  useEffect(() => {
+    const payment = JSON.parse(window.localStorage.getItem('payment'))
+    payment && setDelivery({ ...emptyDelivery, payment })
+  }, [])
 
   const changeDate = useCallback((date) => setDelivery({ ...delivery, date }), [
     delivery,
