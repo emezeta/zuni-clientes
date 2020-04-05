@@ -8,11 +8,16 @@ export default () =>
       'payment',
       JSON.stringify(order.delivery.payment)
     )
+    const body = JSON.stringify({
+      ...order,
+      date: new Date(),
+    })
+
     try {
       const response = await fetch(`${process.env.REACT_APP_API_URL}/orders`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json; charset=UTF-8' },
-        body: JSON.stringify(order),
+        body,
       })
       return response.ok
     } catch (err) {
