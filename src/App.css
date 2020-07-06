@@ -1,6 +1,7 @@
 
 html, body, #root {
   height: 100%;
+  overflow-x: hidden;
 }
 
 .bg-white {
@@ -19,4 +20,16 @@ html, body, #root {
 
 .opacity-2 {
   opacity: 0.4;
+}
+
+.text-small {
+  font-size: .7rem;
+}
+
+.text-blue {
+  color: dodgerblue
+}
+
+.text-darkblue {
+  color: darkblue;
 }
