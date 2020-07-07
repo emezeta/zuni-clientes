@@ -1,0 +1,56 @@
+
+.tt {
+  color: black;
+  position: relative;
+  display: inline-block;
+}
+
+.tt .tt-text {
+  opacity: .9;
+  visibility: hidden;
+  width: 30rem;
+  max-width: 90vw;
+  background-color: rgba(0,0,28,1);
+  color: #fff;
+  text-align: center;
+  padding: 20px;
+  border-radius: 6px;
+  margin-left: -50%;
+  left: 40%;
+  position: absolute;
+  z-index: 1;
+}
+
+.tt .tt-text-top {
+  bottom: 100%;
+}
+
+.tt .tt-text-bottom {
+  top: 100%;
+}
+
+.tt:hover .tt-text {
+  visibility: visible;
+}
+
+.tt .tt-text-top::after {
+  content: " ";
+  position: absolute;
+  top: 100%;
+  left: 20%;
+  margin-bottom: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: black transparent transparent transparent ;
+}
+
+.tt .tt-text-bottom::after {
+  content: " ";
+  position: absolute;
+  bottom: 100%;
+  left: 20%;
+  margin-top: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent black transparent ;
+}

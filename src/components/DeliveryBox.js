@@ -14,6 +14,8 @@ import {
 } from '@material-ui/pickers'
 import DateUtils from '@date-io/dayjs'
 
+import Tooltip from './Tooltip'
+
 const DeliveryBox = ({
   className,
   delivery,
@@ -51,7 +53,11 @@ const DeliveryBox = ({
         error={errors.date}
         margin="normal"
         id="time-picker"
-        label="Horario preferido*"
+        label={
+          <Tooltip tooltip="Es una guía para organizar los trayectos de entregas. Es opcional, pero puede ser muy útil. No es un compromiso de entrega a una hora precisa, intentaremos acercarnos en lo posible.">
+            Horario de entrega*
+          </Tooltip>
+        }
         className="my-2"
         value={delivery.date}
         onChange={changeDate}
