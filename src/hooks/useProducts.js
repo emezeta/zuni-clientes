@@ -1,6 +1,7 @@
 import { useState, useCallback } from 'react'
 import produce from 'immer'
 import { useAlert } from 'react-alert'
+import mixpanel from 'mixpanel-browser'
 
 const emptyProduct = {
   name: '',
@@ -37,11 +38,15 @@ export default () => {
       alert.show('Completa un producto antes de agregar otro')
       return
     }
+    mixpanel.track('Product added')
     mutateProducts((draft) => void draft.push(emptyProduct))
   }, [mutateProducts, validateProducts, alert])
 
   const removeProduct = useCallback(
-    (index) => mutateProducts((draft) => void draft.splice(index, 1)),
+    (index) => {
+      mixpanel.track('Product removed')
+      mutateProducts((draft) => void draft.splice(index, 1))
+    },
     [mutateProducts]
   )
 
@@ -54,6 +59,7 @@ export default () => {
   const resetProducts = useCallback(() => setProducts([]), [])
 
   const repeatOrder = useCallback(() => {
+    mixpanel.track('Repeat order')
     const lastOrder = JSON.parse(window.localStorage.getItem('lastOrder'))
     setProducts(lastOrder)
   }, [])

@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider as AlertProvider } from 'react-alert'
 import AlertTemplate from 'react-alert-template-basic'
+import mixpanel from 'mixpanel-browser'
 
 import './index.css'
 import App from './App'
@@ -13,6 +14,8 @@ const options = {
   timeout: 5000,
   transition: 'fade',
 }
+
+mixpanel.init(process.env.REACT_APP_MIXPANEL_TOKEN)
 
 ReactDOM.render(
   <React.StrictMode>
