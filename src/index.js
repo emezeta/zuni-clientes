@@ -4,8 +4,10 @@ import { Provider as AlertProvider } from 'react-alert'
 import AlertTemplate from 'react-alert-template-basic'
 import mixpanel from 'mixpanel-browser'
 
+import './tools/registerInterceptors'
 import './index.css'
 import App from './App'
+import SessionProvider from './components/SessionProvider'
 import * as serviceWorker from './serviceWorker'
 
 const options = {
@@ -20,7 +22,9 @@ mixpanel.init(process.env.REACT_APP_MIXPANEL_TOKEN)
 ReactDOM.render(
   <React.StrictMode>
     <AlertProvider template={AlertTemplate} {...options}>
-      <App />
+      <SessionProvider>
+        <App />
+      </SessionProvider>
     </AlertProvider>
   </React.StrictMode>,
   document.getElementById('root')
