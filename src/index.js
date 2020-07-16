@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 import { Provider as AlertProvider } from 'react-alert'
 import AlertTemplate from 'react-alert-template-basic'
 import mixpanel from 'mixpanel-browser'
+import { BrowserRouter } from 'react-router-dom'
 
 import './tools/registerInterceptors'
 import './index.css'
@@ -18,12 +19,15 @@ const options = {
 }
 
 mixpanel.init(process.env.REACT_APP_MIXPANEL_TOKEN)
+if (!process.env.REACT_APP_MIXPANEL_TOKEN) mixpanel.track = () => {}
 
 ReactDOM.render(
   <React.StrictMode>
     <AlertProvider template={AlertTemplate} {...options}>
       <SessionProvider>
-        <App />
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
       </SessionProvider>
     </AlertProvider>
   </React.StrictMode>,

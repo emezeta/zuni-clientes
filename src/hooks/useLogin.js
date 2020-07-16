@@ -18,10 +18,11 @@ export default () => {
             body,
           }
         )
-        // mixpanel.track('Login', { success: true })
+        mixpanel.track('Login', { success: true })
+
         return response.ok
       } catch (err) {
-        // mixpanel.track('Login', { success: false })
+        mixpanel.track('Login', { success: false })
         return false
       }
     },
