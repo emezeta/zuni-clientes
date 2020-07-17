@@ -13,13 +13,11 @@ import Header from './components/Header'
 
 const App = () => {
   const session = useSession()
-  console.log(session)
   const navigate = useNavigate()
 
   useEffect(() => {
     if (!session) {
       navigate('/login', { replace: true })
-      console.log('no session')
     }
   }, [session, navigate])
 

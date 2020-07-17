@@ -5,30 +5,17 @@ import { useAlert } from 'react-alert'
 import Button from '@material-ui/core/Button'
 
 import useProducts from '../hooks/useProducts'
-import useClient from '../hooks/useClient'
 import useDelivery from '../hooks/useDelivery'
 import useSubmit from '../hooks/useSubmit'
 import useScrollToError from '../hooks/useScrollToError'
 
-import Disclaimer from '../components/Disclaimer'
 import Loader from '../components/Loader'
-import Header from '../components/Header'
 import Footer from '../components/Footer'
-import ClientBox from '../components/ClientBox'
 import DeliveryBox from '../components/DeliveryBox'
 import ProductBox from '../components/ProductBox'
 
 const App = () => {
   const [loading, setLoading] = useState(false)
-
-  // const {
-  //   client,
-  //   changeName,
-  //   changePhone,
-  //   changeAddress,
-  //   validateClient,
-  //   clientErrors,
-  // } = useClient()
 
   const {
     products,
@@ -98,7 +85,7 @@ const App = () => {
           label: 'Si',
           onClick: async () => {
             setLoading(true)
-            if (await makeOrder({ products, delivery })) {
+            if (await makeOrder({ products, ...delivery })) {
               alert.success('La orden fue recibida correctamente!')
               resetProducts()
               resetDelivery()
@@ -123,17 +110,8 @@ const App = () => {
       ref={containerRef}
       className="container d-flex flex-grow-1 flex-column"
     >
-      <div className="row my-4 align-items-stretch">
-        {/* <div className="col-12 col-md-6 d-flex py-2">
-          <ClientBox
-            errors={clientErrors}
-            client={client}
-            changeName={changeName}
-            changePhone={changePhone}
-            changeAddress={changeAddress}
-          />
-        </div> */}
-        <div className="col-12 col-md-6 py-2">
+      <div className="row mt-4 align-items-stretch">
+        <div className="col-12 col-md-6 offset-md-3 py-2">
           <DeliveryBox
             errors={deliveryErrors}
             delivery={delivery}
@@ -143,6 +121,8 @@ const App = () => {
             changeNotes={changeNotes}
           />
         </div>
+      </div>
+      <div className="row mb-4 align-items-stretch">
         {window.localStorage.getItem('lastOrder') && !products.length && (
           <Button
             variant="outlined"

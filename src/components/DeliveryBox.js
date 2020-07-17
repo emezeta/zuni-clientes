@@ -35,12 +35,12 @@ const DeliveryBox = ({
     <MuiPickersUtilsProvider utils={DateUtils}>
       <KeyboardDatePicker
         disablePast
-        error={errors.date}
+        error={errors.deliveryDate}
         margin="normal"
         id="date-picker-dialog"
         label="Fecha*"
         format="DD/MM/YYYY"
-        value={delivery.date}
+        value={delivery.deliveryDate}
         onChange={changeDate}
         KeyboardButtonProps={{
           'aria-label': 'change date',
@@ -50,7 +50,7 @@ const DeliveryBox = ({
       <KeyboardTimePicker
         minutesStep={5}
         disablePast
-        error={errors.date}
+        error={errors.deliveryDate}
         margin="normal"
         id="time-picker"
         label={
@@ -59,7 +59,7 @@ const DeliveryBox = ({
           </Tooltip>
         }
         className="my-2"
-        value={delivery.date}
+        value={delivery.deliveryDate}
         onChange={changeDate}
         KeyboardButtonProps={{
           'aria-label': 'change time',

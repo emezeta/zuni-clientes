@@ -1,9 +1,11 @@
 import { useState, useCallback } from 'react'
 import mixpanel from 'mixpanel-browser'
+import { useAlert } from 'react-alert'
 
 export default () => {
-  const [phone, setPhone] = useState('')
-  const [password, setPassword] = useState('')
+  const [phone, changePhone] = useState('')
+  const [password, changePassword] = useState('')
+  const alert = useAlert()
 
   const submit = useCallback(
     async (e) => {
@@ -20,28 +22,23 @@ export default () => {
         )
         mixpanel.track('Login', { success: true })
 
+        if (response.status === 401)
+          alert.error('Teléfono o contraseña incorrectos')
+
         return response.ok
       } catch (err) {
         mixpanel.track('Login', { success: false })
         return false
       }
     },
-    [password, phone]
+    [password, phone, alert]
   )
-
-  const onChangePhone = useCallback(({ target: { value } }) => {
-    setPhone(value)
-  }, [])
-
-  const onChangePassword = useCallback(({ target: { value } }) => {
-    setPassword(value)
-  }, [])
 
   return {
     phone,
     password,
-    onChangePhone,
-    onChangePassword,
+    changePhone,
+    changePassword,
     submit,
   }
 }
