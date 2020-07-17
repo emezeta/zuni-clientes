@@ -13,11 +13,10 @@ const ClientBox = ({
 }) => (
   <div
     className={cn(
-      'bg-white rounded px-4 pb-4 pt-3 d-flex flex-column flex-grow-1 shadow',
+      'bg-white rounded px-4 pb-4 pt-1 d-flex flex-column flex-grow-1 shadow',
       className
     )}
   >
-    <span className="align-self-center">Información del cliente</span>
     <TextField
       error={errors.name}
       value={login.phone}
