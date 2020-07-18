@@ -7,6 +7,7 @@ import useSession from './hooks/useSession'
 import './App.css'
 import Login from './pages/Login'
 import Shop from './pages/Shop'
+import Signup from './pages/Signup'
 
 import Disclaimer from './components/Disclaimer'
 import Header from './components/Header'
@@ -29,6 +30,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Shop />}></Route>
           <Route path="/login" element={<Login />}></Route>
+          <Route path="/signup" element={<Signup />}></Route>
         </Routes>
       </div>
     </div>

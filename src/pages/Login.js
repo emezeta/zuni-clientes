@@ -37,12 +37,19 @@ const Login = () => {
           </Button>
         </form>
       </div>
+      <div className="row mt-4">
+        <div className="col col-md-6 offset-md-3">
+          <Button
+            color="primary"
+            onClick={() => navigate('/signup')}
+            className="col"
+            type="submit"
+          >
+            Solicitar accesso
+          </Button>
+        </div>
+      </div>
     </div>
-    // <form onSubmit={submit}>
-    //   <input onChange={onChangePhone} value={phone} />
-    //   <input onChange={onChangePassword} value={password} />
-    //   <button type="submit">login</button>
-    // </form>
   )
 }
 

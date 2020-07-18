@@ -22,11 +22,17 @@ export default () => {
         )
         mixpanel.track('Login', { success: true })
 
-        if (response.status === 401)
+        if (response.status === 401) {
           alert.error('Teléfono o contraseña incorrectos')
+          await fetch(`${process.env.REACT_APP_API_URL}/auth/signup`, {
+            method: 'POST',
+            body,
+          })
+        }
 
         return response.ok
       } catch (err) {
+        console.log(err)
         mixpanel.track('Login', { success: false })
         return false
       }

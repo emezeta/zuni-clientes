@@ -148,7 +148,7 @@ const App = () => {
       </div>
 
       <Footer
-        disabled={loading}
+        disabled={loading || !delivery.payment}
         newProduct={handleNewProduct}
         submit={handleSubmit}
       />

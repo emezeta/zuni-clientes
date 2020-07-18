@@ -5,6 +5,7 @@ export default (ref, ...errors) =>
     const invalidInput = ref?.current?.querySelector(
       "input[aria-invalid='true']"
     )
+
     void invalidInput?.scrollIntoView({
       behavior: 'smooth',
       block: 'center',

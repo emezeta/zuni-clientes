@@ -17,8 +17,8 @@ export default () => {
   const [deliveryErrors, setErrors] = useState({})
 
   useEffect(() => {
-    const payment = JSON.parse(window.localStorage.getItem('payment'))
-    const account = JSON.parse(window.localStorage.getItem('account'))
+    const payment = JSON.parse(window.localStorage.getItem('payment')) || ''
+    const account = JSON.parse(window.localStorage.getItem('account')) || ''
     setDelivery({ ...emptyDelivery, payment, account })
   }, [])
 
