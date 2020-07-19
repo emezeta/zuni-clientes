@@ -42,7 +42,7 @@ const TestingGuide = ({ className }) => (
         })
       }
     >
-      Ayuda
+      Ayuda para pruebas
     </Button>
   </div>
 )
