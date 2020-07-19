@@ -6,6 +6,7 @@ import useSession from '../hooks/useSession'
 import useLogin from '../hooks/useLogin'
 
 import LoginBox from '../components/LoginBox'
+import Loader from '../components/Loader'
 
 const Login = () => {
   const session = useSession()
@@ -15,7 +16,16 @@ const Login = () => {
     session && navigate('/')
   }, [session, navigate])
 
-  const { password, changePassword, phone, changePhone, submit } = useLogin()
+  const {
+    password,
+    changePassword,
+    phone,
+    changePhone,
+    submit,
+    loading,
+  } = useLogin()
+
+  if (loading) return <Loader />
 
   return (
     <div className="container d-flex flex-grow-1 flex-column mt-4">

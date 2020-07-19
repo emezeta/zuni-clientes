@@ -128,9 +128,9 @@ const App = () => {
     })
   }
 
-  return loading ? (
-    <Loader />
-  ) : (
+  if (loading) return <Loader />
+
+  return (
     <div
       ref={containerRef}
       className="container d-flex flex-grow-1 flex-column"

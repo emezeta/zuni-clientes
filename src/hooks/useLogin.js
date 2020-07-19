@@ -4,11 +4,13 @@ import { useSnackbar } from 'notistack'
 
 export default () => {
   const [phone, changePhone] = useState('')
+  const [loading, setLoading] = useState(false)
   const [password, changePassword] = useState('')
   const { enqueueSnackbar } = useSnackbar()
 
   const submit = useCallback(
     async (e) => {
+      setLoading(true)
       e.preventDefault()
       const body = JSON.stringify({ phone, password })
 
@@ -32,10 +34,12 @@ export default () => {
           })
         }
 
+        setLoading(false)
         return response.ok
       } catch (err) {
         console.log(err)
         mixpanel.track('Login', { success: false })
+        setLoading(false)
         return false
       }
     },
@@ -48,5 +52,6 @@ export default () => {
     changePhone,
     changePassword,
     submit,
+    loading,
   }
 }
