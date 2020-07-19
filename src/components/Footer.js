@@ -8,7 +8,6 @@ const Footer = ({ newProduct, submit, disabled }) => (
       disabled={disabled}
       onClick={submit}
       className="col mr-1 mr-md-3 py-md-4"
-      variant="contained"
       color="secondary"
     >
       REALIZAR LA COMPRA
@@ -17,7 +16,6 @@ const Footer = ({ newProduct, submit, disabled }) => (
       disabled={disabled}
       onClick={newProduct}
       className="col ml-1 ml-md-3 py-md-4"
-      variant="contained"
       color="primary"
     >
       AGREGAR PRODUCTO

@@ -8,7 +8,6 @@ const Disclaimer = () => (
     style={{
       top: 0,
       backgroundColor: '#FF9494',
-      zIndex: 2000,
     }}
   >
     VERSIÓN DE PRUEBA

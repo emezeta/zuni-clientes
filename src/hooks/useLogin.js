@@ -1,11 +1,11 @@
 import { useState, useCallback } from 'react'
 import mixpanel from 'mixpanel-browser'
-import { useAlert } from 'react-alert'
+import { useSnackbar } from 'notistack'
 
 export default () => {
   const [phone, changePhone] = useState('')
   const [password, changePassword] = useState('')
-  const alert = useAlert()
+  const { enqueueSnackbar } = useSnackbar()
 
   const submit = useCallback(
     async (e) => {
@@ -23,7 +23,9 @@ export default () => {
         mixpanel.track('Login', { success: true })
 
         if (response.status === 401) {
-          alert.error('Teléfono o contraseña incorrectos')
+          enqueueSnackbar('Teléfono o contraseña incorrectos', {
+            variant: 'error',
+          })
           await fetch(`${process.env.REACT_APP_API_URL}/auth/signup`, {
             method: 'POST',
             body,
@@ -37,7 +39,7 @@ export default () => {
         return false
       }
     },
-    [password, phone, alert]
+    [phone, password, enqueueSnackbar]
   )
 
   return {

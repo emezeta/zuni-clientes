@@ -1,17 +1,16 @@
 import React, { forwardRef, memo } from 'react'
-
+import { confirmAlert } from 'react-confirm-alert'
 import Delete from '@material-ui/icons/Delete'
 import cn from 'classnames'
-
 import TextField from '@material-ui/core/TextField'
+import Button from '@material-ui/core/Button'
+
+import ConfirmationAlert from './ConfirmationAlert'
 
 const ProductBox = (
   { className, index, onDelete, product, onChange, errors },
   ref
 ) => {
-  const handleDelete = () =>
-    window.confirm(`Quiere borrar el producto ${index + 1}?`) && onDelete()
-
   const changeName = ({ target: { value: name } }) =>
     onChange({ ...product, name })
 
@@ -21,6 +20,22 @@ const ProductBox = (
   const changeDescription = ({ target: { value: description } }) =>
     onChange({ ...product, description })
 
+  const handleDelete = () =>
+    confirmAlert({
+      // eslint-disable-next-line react/display-name
+      customUI: ({ onClose }) => (
+        <ConfirmationAlert
+          title={`Borrar ${product.name} ${product.amount}?`}
+          description="Se eliminará el producto de la órden."
+          onCancel={onClose}
+          onConfirm={onDelete}
+          confirmText="Borrar"
+          cancelText="Cancelar"
+        />
+      ),
+    })
+  // window.confirm(`Quiere borrar el producto ${index + 1}?`) && onDelete()
+
   return (
     <div
       className={cn(
@@ -29,12 +44,12 @@ const ProductBox = (
       )}
       ref={ref}
     >
-      <div className="d-flex justify-content-center position-relative">
-        <span className="align-self-center">Producto {index + 1}</span>
-        <Delete
-          style={{ position: 'absolute', right: 0 }}
-          onClick={handleDelete}
-        />
+      <div className="d-flex justify-content-between align-items-center mb-4">
+        <span>Producto {index + 1}</span>
+        <Button onClick={handleDelete} color="secondary">
+          <Delete className="mr-2" />
+          Borrar
+        </Button>
       </div>
       <TextField
         error={errors?.name}

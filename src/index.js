@@ -1,7 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { Provider as AlertProvider } from 'react-alert'
-import AlertTemplate from 'react-alert-template-basic'
+import { SnackbarProvider } from 'notistack'
 import mixpanel from 'mixpanel-browser'
 import { BrowserRouter } from 'react-router-dom'
 
@@ -11,24 +10,24 @@ import App from './App'
 import SessionProvider from './components/SessionProvider'
 import * as serviceWorker from './serviceWorker'
 
-const options = {
-  position: 'bottom center',
-  offset: '100px',
-  timeout: 5000,
-  transition: 'fade',
-}
+// const options = {
+//   position: 'bottom center',
+//   offset: '100px',
+//   timeout: 5000,
+//   transition: 'fade',
+// }
 
 mixpanel.init(process.env.REACT_APP_MIXPANEL_TOKEN)
 if (!process.env.REACT_APP_MIXPANEL_TOKEN) mixpanel.track = () => {}
 
 ReactDOM.render(
-  <AlertProvider template={AlertTemplate} {...options}>
-    <SessionProvider>
-      <BrowserRouter>
+  <SessionProvider>
+    <BrowserRouter>
+      <SnackbarProvider class="mb-5">
         <App />
-      </BrowserRouter>
-    </SessionProvider>
-  </AlertProvider>,
+      </SnackbarProvider>
+    </BrowserRouter>
+  </SessionProvider>,
   document.getElementById('root')
 )
 

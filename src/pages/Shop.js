@@ -1,14 +1,15 @@
 import React, { useRef, useState } from 'react'
 import { confirmAlert } from 'react-confirm-alert'
 import 'react-confirm-alert/src/react-confirm-alert.css'
-import { useAlert } from 'react-alert'
 import Button from '@material-ui/core/Button'
+import { useSnackbar } from 'notistack'
 
 import useProducts from '../hooks/useProducts'
 import useDelivery from '../hooks/useDelivery'
 import useSubmit from '../hooks/useSubmit'
 import useScrollToError from '../hooks/useScrollToError'
 
+import ConfirmationAlert from '../components/ConfirmationAlert'
 import Loader from '../components/Loader'
 import Footer from '../components/Footer'
 import DeliveryBox from '../components/DeliveryBox'
@@ -17,6 +18,7 @@ import OrderSummary from '../components/OrderSummary'
 
 const App = () => {
   const [loading, setLoading] = useState(false)
+  const { enqueueSnackbar } = useSnackbar()
 
   const {
     products,
@@ -58,8 +60,6 @@ const App = () => {
 
   const makeOrder = useSubmit()
 
-  const alert = useAlert()
-
   const valid = () => {
     const deliveryErrors = validateDelivery()
     const productErrors = validateProducts()
@@ -68,13 +68,15 @@ const App = () => {
 
   const handleSubmit = async () => {
     if (!products.length) {
-      alert.error('Agregue al menos un producto')
+      enqueueSnackbar('Agregue al menos un producto', { variant: 'warning' })
       setLoading(false)
       return
     }
 
     if (!valid()) {
-      alert.error('Hay campos requeridos sin completar')
+      enqueueSnackbar('Hay campos requeridos sin completar', {
+        variant: 'warning',
+      })
       setLoading(false)
       return
     }
@@ -87,19 +89,39 @@ const App = () => {
           onConfirm={async () => {
             setLoading(true)
             if (await makeOrder({ products, ...delivery })) {
-              alert.success('La orden fue recibida correctamente!')
+              enqueueSnackbar('La orden fue recibida correctamente!', {
+                variant: 'success',
+              })
               resetProducts()
               resetDelivery()
               setLoading(false)
               onClose()
             } else {
-              alert.error('Hubo un error, por favor intente nuevamente')
+              enqueueSnackbar('Hubo un error, por favor intente nuevamente', {
+                variant: 'error',
+              })
               setLoading(false)
               onClose()
             }
           }}
           products={products}
           delivery={delivery}
+        />
+      ),
+    })
+  }
+
+  const handleReset = () => {
+    confirmAlert({
+      // eslint-disable-next-line react/display-name
+      customUI: ({ onClose }) => (
+        <ConfirmationAlert
+          title="Borrar todos los productos?"
+          cancelText="Cancelar"
+          confirmText="Borrar"
+          onCancel={onClose}
+          onConfirm={resetProducts}
+          description="Esta acción eliminará todos los productos de tu órden."
         />
       ),
     })
@@ -125,10 +147,21 @@ const App = () => {
         </div>
       </div>
       <div className="row mb-4 align-items-stretch">
+        {!!products.length && (
+          <Button
+            color="secondary"
+            variant="outlined"
+            className="mx-auto mt-md-4 my-4"
+            onClick={handleReset}
+          >
+            Borrar productos
+          </Button>
+        )}
         {window.localStorage.getItem('lastOrder') && !products.length && (
           <Button
             variant="outlined"
-            className="mx-auto mt-md-4 mt-4"
+            className="mx-auto mt-md-4 my-4"
+            color="primary"
             onClick={repeatOrder}
           >
             Repetir ultimo pedido
@@ -150,7 +183,7 @@ const App = () => {
       </div>
 
       <Footer
-        disabled={loading || !delivery.payment}
+        disabled={loading}
         newProduct={handleNewProduct}
         submit={handleSubmit}
       />

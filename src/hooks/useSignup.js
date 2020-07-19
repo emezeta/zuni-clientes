@@ -1,12 +1,12 @@
 import { useState, useCallback, useEffect } from 'react'
-import { useAlert } from 'react-alert'
 import { useNavigate } from 'react-router-dom'
+import { useSnackbar } from 'notistack'
 
 import useSession from '../hooks/useSession'
 
 export default () => {
   const [phone, changePhone] = useState('')
-  const alert = useAlert()
+  const { enqueueSnackbar } = useSnackbar()
 
   const session = useSession()
   const navigate = useNavigate()
@@ -29,7 +29,9 @@ export default () => {
           }
         )
         if (response.ok) {
-          alert.success('Solicitud realizada con éxito')
+          enqueueSnackbar('Solicitud realizada con éxito', {
+            variant: 'success',
+          })
           navigate('/login')
         }
 
@@ -39,7 +41,7 @@ export default () => {
         return false
       }
     },
-    [phone, alert, navigate]
+    [phone, enqueueSnackbar, navigate]
   )
 
   return {
