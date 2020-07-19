@@ -135,8 +135,8 @@ const App = () => {
       ref={containerRef}
       className="container d-flex flex-grow-1 flex-column"
     >
-      <Help className="mt-2" />
       <div className="row mt-2 align-items-stretch">
+        <Help className="col-12 col-md-6 offset-md-3" />
         <div className="col-12 col-md-6 offset-md-3 py-2">
           <DeliveryBox
             errors={deliveryErrors}
