@@ -17,9 +17,13 @@ export default () => {
   const [deliveryErrors, setErrors] = useState({})
 
   useEffect(() => {
-    const payment = JSON.parse(window.localStorage.getItem('payment')) || ''
-    const account = JSON.parse(window.localStorage.getItem('account')) || ''
-    setDelivery({ ...emptyDelivery, payment, account })
+    try {
+      const payment = JSON.parse(window.localStorage.getItem('payment') || '')
+      const account = JSON.parse(window.localStorage.getItem('account') || '')
+      setDelivery({ ...emptyDelivery, payment, account })
+    } catch (err) {
+      console.log(err)
+    }
   }, [])
 
   const changeDate = useCallback(

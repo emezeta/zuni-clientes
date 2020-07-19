@@ -54,7 +54,10 @@ const DeliveryBox = ({
         margin="normal"
         id="time-picker"
         label={
-          <Tooltip tooltip="Es una guía para organizar los trayectos de entregas. Es opcional, pero puede ser muy útil. No es un compromiso de entrega a una hora precisa, intentaremos acercarnos en lo posible.">
+          <Tooltip
+            arrow
+            title="Es una guía para organizar los trayectos de entregas. Es opcional, pero puede ser muy útil. No es un compromiso de entrega a una hora precisa, intentaremos acercarnos en lo posible."
+          >
             Horario de entrega*
           </Tooltip>
         }

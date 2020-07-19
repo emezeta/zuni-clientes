@@ -22,15 +22,13 @@ mixpanel.init(process.env.REACT_APP_MIXPANEL_TOKEN)
 if (!process.env.REACT_APP_MIXPANEL_TOKEN) mixpanel.track = () => {}
 
 ReactDOM.render(
-  <React.StrictMode>
-    <AlertProvider template={AlertTemplate} {...options}>
-      <SessionProvider>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      </SessionProvider>
-    </AlertProvider>
-  </React.StrictMode>,
+  <AlertProvider template={AlertTemplate} {...options}>
+    <SessionProvider>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </SessionProvider>
+  </AlertProvider>,
   document.getElementById('root')
 )
 

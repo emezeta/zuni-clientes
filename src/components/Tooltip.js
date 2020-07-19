@@ -1,16 +1,33 @@
 import React, { memo } from 'react'
-import cn from 'classnames'
+import { default as MaterialTooltip } from '@material-ui/core/Tooltip'
+import { withStyles } from '@material-ui/core/styles'
 
 import '../styles/tooltips.css'
 import InfoIcon from '../assets/info.svg'
 
-const Tooltip = ({ className, children, tooltip, bottom = false }) => (
-  <div className={cn(className, 'tt')}>
-    {children} <img alt="infomración" src={InfoIcon} />
-    <span className={cn('tt-text', bottom ? 'tt-text-bottom' : 'tt-text-top')}>
-      {tooltip}
-    </span>
-  </div>
+const DarkerTooltip = withStyles((theme) => ({
+  tooltip: {
+    backgroundColor: theme.palette.common.black,
+    boxShadow: theme.shadows[1],
+    fontSize: 14,
+    padding: '1rem 1.5rem',
+  },
+}))(MaterialTooltip)
+
+const Tooltip = ({ children, ...props }) => (
+  <DarkerTooltip {...props}>
+    <div
+      onContextMenu={(e) => {
+        e.preventDefault()
+        return false
+      }}
+      className="select-none position-relative"
+    >
+      <div className="shield"></div>
+      {children}{' '}
+      <img className="select-none" alt="información" src={InfoIcon} />
+    </div>
+  </DarkerTooltip>
 )
 
 export default memo(Tooltip)

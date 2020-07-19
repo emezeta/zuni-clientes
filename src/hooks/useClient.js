@@ -13,8 +13,12 @@ export default () => {
   const [clientErrors, setErrors] = useState({})
 
   useEffect(() => {
-    const localClient = JSON.parse(window.localStorage.getItem('client'))
-    localClient && setClient(localClient)
+    try {
+      const localClient = JSON.parse(window.localStorage.getItem('client'))
+      localClient && setClient(localClient)
+    } catch (err) {
+      console.log(err)
+    }
   }, [])
 
   const changeName = useCallback((name) => setClient({ ...client, name }), [

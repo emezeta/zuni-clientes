@@ -13,6 +13,7 @@ import Loader from '../components/Loader'
 import Footer from '../components/Footer'
 import DeliveryBox from '../components/DeliveryBox'
 import ProductBox from '../components/ProductBox'
+import OrderSummary from '../components/OrderSummary'
 
 const App = () => {
   const [loading, setLoading] = useState(false)
@@ -79,27 +80,28 @@ const App = () => {
     }
 
     confirmAlert({
-      message: 'Desea finalizar al compra?',
-      buttons: [
-        {
-          label: 'Si',
-          onClick: async () => {
+      // eslint-disable-next-line react/display-name
+      customUI: ({ onClose }) => (
+        <OrderSummary
+          onCancel={onClose}
+          onConfirm={async () => {
             setLoading(true)
             if (await makeOrder({ products, ...delivery })) {
               alert.success('La orden fue recibida correctamente!')
               resetProducts()
               resetDelivery()
               setLoading(false)
+              onClose()
             } else {
               alert.error('Hubo un error, por favor intente nuevamente')
               setLoading(false)
+              onClose()
             }
-          },
-        },
-        {
-          label: 'No',
-        },
-      ],
+          }}
+          products={products}
+          delivery={delivery}
+        />
+      ),
     })
   }
 

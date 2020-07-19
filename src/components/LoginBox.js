@@ -18,6 +18,7 @@ const ClientBox = ({
     )}
   >
     <TextField
+      type="tel"
       error={errors.name}
       value={login.phone}
       onChange={(e) => changePhone(e.target.value)}

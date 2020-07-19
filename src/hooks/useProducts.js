@@ -60,8 +60,12 @@ export default () => {
 
   const repeatOrder = useCallback(() => {
     mixpanel.track('Repeat order')
-    const lastOrder = JSON.parse(window.localStorage.getItem('lastOrder'))
-    setProducts(lastOrder)
+    try {
+      const lastOrder = JSON.parse(window.localStorage.getItem('lastOrder'))
+      setProducts(lastOrder)
+    } catch (err) {
+      console.log(err)
+    }
   }, [])
 
   return {

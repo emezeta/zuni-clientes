@@ -1,34 +1,24 @@
-import React, { useEffect } from 'react'
-import { Routes, Route, useNavigate } from 'react-router-dom'
+import React from 'react'
+import { Routes, Route } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css'
-
-import useSession from './hooks/useSession'
 
 import './App.css'
 import Login from './pages/Login'
 import Shop from './pages/Shop'
 import Signup from './pages/Signup'
 
+import PrivateRoute from './components/PrivateRoute'
 import Disclaimer from './components/Disclaimer'
 import Header from './components/Header'
 
 const App = () => {
-  const session = useSession()
-  const navigate = useNavigate()
-
-  useEffect(() => {
-    if (!session) {
-      navigate('/login', { replace: true })
-    }
-  }, [session, navigate])
-
   return (
     <div className="min-vh-100 d-flex flex-column">
       <div className="d-flex flex-grow-1 flex-column bg-gray">
         <Disclaimer />
         <Header />
         <Routes>
-          <Route path="/" element={<Shop />}></Route>
+          <PrivateRoute path="/" element={<Shop />}></PrivateRoute>
           <Route path="/login" element={<Login />}></Route>
           <Route path="/signup" element={<Signup />}></Route>
         </Routes>
