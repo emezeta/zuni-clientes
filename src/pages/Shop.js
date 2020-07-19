@@ -15,6 +15,7 @@ import Footer from '../components/Footer'
 import DeliveryBox from '../components/DeliveryBox'
 import ProductBox from '../components/ProductBox'
 import OrderSummary from '../components/OrderSummary'
+import Help from '../components/Help'
 
 const App = () => {
   const [loading, setLoading] = useState(false)
@@ -134,7 +135,8 @@ const App = () => {
       ref={containerRef}
       className="container d-flex flex-grow-1 flex-column"
     >
-      <div className="row mt-4 align-items-stretch">
+      <Help className="mt-2" />
+      <div className="row mt-2 align-items-stretch">
         <div className="col-12 col-md-6 offset-md-3 py-2">
           <DeliveryBox
             errors={deliveryErrors}

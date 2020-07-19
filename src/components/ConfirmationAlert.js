@@ -12,8 +12,8 @@ const OrderSummary = ({
   onConfirm,
   title,
   description,
-  confirmText,
-  cancelText,
+  confirmText = 'Confirmar',
+  cancelText = 'Cancelar',
 }) => (
   <Dialog
     open
@@ -28,18 +28,22 @@ const OrderSummary = ({
       </DialogContentText>
     </DialogContent>
     <DialogActions>
-      <Button onClick={onCancel} color="primary">
-        {cancelText}
-      </Button>
-      <Button
-        onClick={() => {
-          onConfirm()
-          onCancel()
-        }}
-        color="primary"
-      >
-        {confirmText}
-      </Button>
+      {onCancel && (
+        <Button onClick={onCancel} color="primary">
+          {cancelText}
+        </Button>
+      )}
+      {onConfirm && (
+        <Button
+          onClick={() => {
+            onConfirm()
+            onCancel()
+          }}
+          color="primary"
+        >
+          {confirmText}
+        </Button>
+      )}
     </DialogActions>
   </Dialog>
 )
