@@ -31,7 +31,7 @@ const TestingGuide = ({ className }) => (
                     {' '}
                     aquí
                   </a>{' '}
-                  o o al <a href="sms://+598 92 235 005">092 235 005</a> por
+                  o o al <a href="https://wa.me/59892235005">092 235 005</a> por
                   whatsapp. Te responderemos por whastapp, mail o un mensaje de
                   texto, dejanos información de contacto para que podamos
                   hacerlo!
