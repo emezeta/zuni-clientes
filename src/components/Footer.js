@@ -3,7 +3,7 @@ import React, { memo } from 'react'
 import Button from '@material-ui/core/Button'
 
 const Footer = ({ newProduct, submit, disabled }) => (
-  <div className="row">
+  <div className="row mb-4">
     <div className="col col-md-6 offset-md-3 mb-4">
       <Button
         disabled={disabled}

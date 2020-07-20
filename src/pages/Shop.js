@@ -131,44 +131,42 @@ const App = () => {
   if (loading) return <Loader />
 
   return (
-    <div
-      ref={containerRef}
-      className="container d-flex flex-grow-1 flex-column"
-    >
-      <div className="row mt-2 align-items-stretch">
-        <Help className="col-12 col-md-6 offset-md-3" />
-        <div className="col-12 col-md-6 offset-md-3 py-2">
-          <DeliveryBox
-            errors={deliveryErrors}
-            delivery={delivery}
-            changePayment={changePayment}
-            changeAccount={changeAccount}
-            changeDate={changeDate}
-            changeNotes={changeNotes}
-          />
+    <>
+      <div className="row align-items-stretch">
+        <Help className="col-12 col-md-6 offset-md-3 mb-2" />
+        <DeliveryBox
+          className="col-12 col-md-6 offset-md-3 mb-4"
+          errors={deliveryErrors}
+          delivery={delivery}
+          changePayment={changePayment}
+          changeAccount={changeAccount}
+          changeDate={changeDate}
+          changeNotes={changeNotes}
+        />
+        <div className="col-12 col-md-6 offset-md-3 mb-4">
+          {!!products.length && (
+            <Button
+              className="w-100"
+              color="secondary"
+              variant="outlined"
+              onClick={handleReset}
+            >
+              Borrar productos
+            </Button>
+          )}
+          {window.localStorage.getItem('lastOrder') && !products.length && (
+            <Button
+              className="w-100"
+              variant="outlined"
+              color="primary"
+              onClick={repeatOrder}
+            >
+              Repetir ultimo pedido
+            </Button>
+          )}
         </div>
       </div>
-      <div className="row mb-4 align-items-stretch">
-        {!!products.length && (
-          <Button
-            color="secondary"
-            variant="outlined"
-            className="mx-auto mt-md-4 my-4"
-            onClick={handleReset}
-          >
-            Borrar productos
-          </Button>
-        )}
-        {window.localStorage.getItem('lastOrder') && !products.length && (
-          <Button
-            variant="outlined"
-            className="mx-auto mt-md-4 my-4"
-            color="primary"
-            onClick={repeatOrder}
-          >
-            Repetir ultimo pedido
-          </Button>
-        )}
+      <div className="row">
         {products.map((product, index) => (
           <div key={index} className="col-12 col-md-4">
             <ProductBox
@@ -189,7 +187,7 @@ const App = () => {
         newProduct={handleNewProduct}
         submit={handleSubmit}
       />
-    </div>
+    </>
   )
 }
 

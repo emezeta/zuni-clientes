@@ -17,16 +17,18 @@ const App = () => {
   return (
     <SessionProvider>
       <BrowserRouter>
-        <SnackbarProvider class="mb-5">
+        <SnackbarProvider>
           <div className="min-vh-100 d-flex flex-column">
             <div className="d-flex flex-grow-1 flex-column bg-gray">
               <Disclaimer />
-              <Header />
-              <Routes>
-                <PrivateRoute path="/" element={<Shop />}></PrivateRoute>
-                <Route path="/login" element={<Login />}></Route>
-                <Route path="/signup" element={<Signup />}></Route>
-              </Routes>
+              <div className="container py-3">
+                <Header />
+                <Routes>
+                  <PrivateRoute path="/" element={<Shop />}></PrivateRoute>
+                  <Route path="/login" element={<Login />}></Route>
+                  <Route path="/signup" element={<Signup />}></Route>
+                </Routes>
+              </div>
             </div>
           </div>
         </SnackbarProvider>

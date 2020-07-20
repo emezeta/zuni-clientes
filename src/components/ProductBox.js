@@ -1,9 +1,11 @@
 import React, { forwardRef, memo } from 'react'
-import { confirmAlert } from 'react-confirm-alert'
-import Delete from '@material-ui/icons/Delete'
 import cn from 'classnames'
-import TextField from '@material-ui/core/TextField'
+import { confirmAlert } from 'react-confirm-alert'
+
 import Button from '@material-ui/core/Button'
+import Card from '@material-ui/core/Card'
+import TextField from '@material-ui/core/TextField'
+import Delete from '@material-ui/icons/Delete'
 
 import ConfirmationAlert from './ConfirmationAlert'
 
@@ -34,14 +36,11 @@ const ProductBox = (
         />
       ),
     })
-  // window.confirm(`Quiere borrar el producto ${index + 1}?`) && onDelete()
 
   return (
-    <div
-      className={cn(
-        'bg-white rounded px-4 pb-4 pt-3 d-flex flex-column shadow',
-        className
-      )}
+    <Card
+      raised
+      className={cn('px-4 pb-4 pt-3 d-flex flex-column', className)}
       ref={ref}
     >
       <div className="d-flex justify-content-between align-items-center mb-4">
@@ -72,7 +71,7 @@ const ProductBox = (
         className="my-2"
         label="Descripción"
       />
-    </div>
+    </Card>
   )
 }
 

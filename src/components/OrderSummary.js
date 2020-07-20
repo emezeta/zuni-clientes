@@ -1,11 +1,13 @@
 import React, { memo } from 'react'
+
 import Button from '@material-ui/core/Button'
+import Card from '@material-ui/core/Card'
 
 import DeliveryDisplay from './DeliveryDisplay'
 import ProductsTable from './ProductsTable'
 
 const OrderSummary = ({ delivery, products, onCancel, onConfirm }) => (
-  <div className="bg-white rounded p-4 shadow">
+  <Card className="p-4">
     <DeliveryDisplay delivery={delivery} />
     <ProductsTable products={products} />
     <Button
@@ -24,7 +26,7 @@ const OrderSummary = ({ delivery, products, onCancel, onConfirm }) => (
     >
       CANCELAR
     </Button>
-  </div>
+  </Card>
 )
 
 export default memo(OrderSummary)

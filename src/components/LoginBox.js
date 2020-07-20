@@ -1,8 +1,8 @@
 import React, { memo } from 'react'
-
 import cn from 'classnames'
 
 import TextField from '@material-ui/core/TextField'
+import Card from '@material-ui/core/Card'
 
 const LoginBox = ({
   className,
@@ -11,12 +11,7 @@ const LoginBox = ({
   changePhone,
   errors,
 }) => (
-  <div
-    className={cn(
-      'bg-white rounded px-4 pb-4 pt-1 d-flex flex-column flex-grow-1 shadow',
-      className
-    )}
-  >
+  <Card className={cn('px-4 pb-4 pt-1 d-flex flex-column', className)}>
     <TextField
       type="tel"
       value={login.phone}
@@ -31,7 +26,7 @@ const LoginBox = ({
       label="Contraseña*"
       type="password"
     />
-  </div>
+  </Card>
 )
 
 export default memo(LoginBox)

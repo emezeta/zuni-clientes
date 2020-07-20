@@ -29,7 +29,7 @@ const Login = () => {
   if (loading) return <Loader />
 
   return (
-    <div className="container d-flex flex-grow-1 flex-column mt-4">
+    <>
       <div className="row">
         <form onSubmit={submit} className="col col-md-6 offset-md-3">
           <LoginBox
@@ -56,7 +56,7 @@ const Login = () => {
           </Link>
         </div>
       </div>
-    </div>
+    </>
   )
 }
 
