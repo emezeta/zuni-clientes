@@ -4,7 +4,7 @@ import cn from 'classnames'
 
 import TextField from '@material-ui/core/TextField'
 
-const ClientBox = ({
+const LoginBox = ({
   className,
   login,
   changePassword,
@@ -19,14 +19,12 @@ const ClientBox = ({
   >
     <TextField
       type="tel"
-      error={errors.name}
       value={login.phone}
       onChange={(e) => changePhone(e.target.value)}
       className="my-2"
       label="Teléfono*"
     />
     <TextField
-      error={errors.phone}
       value={login.password}
       onChange={(e) => changePassword(e.target.value)}
       className="my-2"
@@ -36,4 +34,4 @@ const ClientBox = ({
   </div>
 )
 
-export default memo(ClientBox)
+export default memo(LoginBox)

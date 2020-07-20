@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Button from '@material-ui/core/Button'
+import Link from '@material-ui/core/Link'
 
 import useSession from '../hooks/useSession'
 import useLogin from '../hooks/useLogin'
@@ -35,7 +36,6 @@ const Login = () => {
             login={{ phone, password }}
             changePhone={changePhone}
             changePassword={changePassword}
-            errors={{}}
           />
           <Button
             variant="contained"
@@ -49,14 +49,11 @@ const Login = () => {
       </div>
       <div className="row mt-4">
         <div className="col col-md-6 offset-md-3">
-          <Button
-            color="primary"
-            onClick={() => navigate('/signup')}
-            className="col"
-            type="submit"
-          >
-            Solicitar accesso
-          </Button>
+          <Link href="/signup">
+            <Button color="primary" className="col">
+              Solicitar accesso
+            </Button>
+          </Link>
         </div>
       </div>
     </div>
