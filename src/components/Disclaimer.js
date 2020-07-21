@@ -7,7 +7,7 @@ const Disclaimer = () => (
     className="d-flex flex-column align-items-center justify-content-center py-2"
     style={{
       top: 0,
-      backgroundColor: '#FF9494',
+      backgroundColor: '#ff644e',
     }}
   >
     VERSIÓN DE PRUEBA
