@@ -2,26 +2,32 @@ import React, { memo } from 'react'
 
 import Button from '@material-ui/core/Button'
 
-const Footer = ({ newProduct, submit, disabled }) => (
+const Footer = ({ newProduct, submit, disabled, showSubmit }) => (
   <div className="row mb-4">
-    <div className="col col-md-6 offset-md-3 mb-4">
+    <div className="col-12 col-md-6 offset-md-3">
       <Button
-        disabled={disabled}
-        onClick={submit}
-        className="col-6 py-3"
-        color="secondary"
-      >
-        REALIZAR LA COMPRA
-      </Button>
-      <Button
+        variant="contained"
         disabled={disabled}
         onClick={newProduct}
-        className="col-6 py-3"
-        color="primary"
+        className="w-100"
+        color="secondary"
       >
         AGREGAR PRODUCTO
       </Button>
     </div>
+    {!!showSubmit && (
+      <div className="col-12 mt-2 col-md-6 offset-md-3">
+        <Button
+          variant="contained"
+          disabled={disabled}
+          onClick={submit}
+          className="w-100"
+          color="primary"
+        >
+          REALIZAR ORDEN
+        </Button>
+      </div>
+    )}
   </div>
 )
 

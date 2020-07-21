@@ -143,7 +143,7 @@ const App = () => {
           changeDate={changeDate}
           changeNotes={changeNotes}
         />
-        <div className="col-12 col-md-6 offset-md-3 mb-4">
+        <div className="col-12 col-md-6 offset-md-3 mb-2">
           {!!products.length && (
             <Button
               className="w-100"
@@ -158,31 +158,34 @@ const App = () => {
             <Button
               className="w-100"
               variant="outlined"
-              color="primary"
+              color="secondary"
               onClick={repeatOrder}
             >
-              Repetir ultimo pedido
+              Repetir pedido
             </Button>
           )}
         </div>
       </div>
-      <div className="row">
-        {products.map((product, index) => (
-          <div key={index} className="col-12 col-md-4">
-            <ProductBox
-              errors={productErrors[index]}
-              product={product}
-              onChange={(newProduct) => changeProduct(index, newProduct)}
-              onDelete={() => removeProduct(index)}
-              ref={index === products.length - 1 ? lastProductRef : null}
-              className="my-2"
-              index={index}
-            />
-          </div>
-        ))}
-      </div>
+      {!!products.length && (
+        <div className="row mb-4">
+          {products.map((product, index) => (
+            <div key={index} className="col-12 col-md-4">
+              <ProductBox
+                errors={productErrors[index]}
+                product={product}
+                onChange={(newProduct) => changeProduct(index, newProduct)}
+                onDelete={() => removeProduct(index)}
+                ref={index === products.length - 1 ? lastProductRef : null}
+                className="mb-2"
+                index={index}
+              />
+            </div>
+          ))}
+        </div>
+      )}
 
       <Footer
+        showSubmit={products.length}
         disabled={loading}
         newProduct={handleNewProduct}
         submit={handleSubmit}

@@ -8,7 +8,7 @@ const TestingGuide = ({ className }) => (
   <div className={className}>
     <Button
       className="w-100"
-      variant="outlined"
+      variant="contained"
       color="primary"
       onClick={() =>
         confirmAlert({
