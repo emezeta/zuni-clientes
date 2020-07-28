@@ -22,16 +22,16 @@ export default () => {
             body,
           }
         )
-        mixpanel.track('Login', { success: true })
 
         if (response.status === 401) {
+          mixpanel.track('Login', { success: false })
           enqueueSnackbar('Teléfono o contraseña incorrectos', {
             variant: 'error',
           })
-          await fetch(`${process.env.REACT_APP_API_URL}/auth/signup`, {
-            method: 'POST',
-            body,
-          })
+        }
+
+        if (response.ok) {
+          mixpanel.track('Login', { success: true })
         }
 
         setLoading(false)

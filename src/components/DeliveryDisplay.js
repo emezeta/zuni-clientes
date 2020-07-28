@@ -76,7 +76,7 @@ const DeliveryDisplay = ({ className, delivery }) => (
           }}
           value={delivery.account}
           className="w-50"
-          label="Número de cuenta*"
+          label="Nro. de cuenta*"
         />
       )}
     </div>

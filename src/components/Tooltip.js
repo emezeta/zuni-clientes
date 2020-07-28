@@ -1,9 +1,9 @@
 import React, { memo } from 'react'
 import { default as MaterialTooltip } from '@material-ui/core/Tooltip'
 import { withStyles } from '@material-ui/core/styles'
+import HelpIcon from '@material-ui/icons/Help'
 
 import '../styles/tooltips.css'
-import InfoIcon from '../assets/info.svg'
 
 const DarkerTooltip = withStyles((theme) => ({
   tooltip: {
@@ -21,11 +21,10 @@ const Tooltip = ({ children, ...props }) => (
         e.preventDefault()
         return false
       }}
-      className="select-none position-relative"
+      className="select-none d-flex position-relative align-items-center"
     >
       <div className="shield"></div>
-      {children}{' '}
-      <img className="select-none" alt="información" src={InfoIcon} />
+      {children} <HelpIcon className="ml-1" />
     </div>
   </DarkerTooltip>
 )

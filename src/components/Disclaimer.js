@@ -25,7 +25,7 @@ const Disclaimer = () => (
           </span>
         }
       >
-        Tus opiniones son lo que cuenta, ayúdanos a mejorar.
+        Tu opinión nos interesa, ayúdanos a mejorar.
       </Tooltip>
     </div>
   </div>
