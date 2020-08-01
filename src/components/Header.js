@@ -3,8 +3,8 @@ import React, { memo } from 'react'
 import logo from '../assets/header.png'
 
 const Header = () => (
-  <div className="row mb-4">
-    <div className="col col-md-6 offset-md-3">
+  <div className="row mb-4 justify-content-center">
+    <div className="col-12 col-md-8 col-lg-6">
       <img
         src={logo}
         alt="zunimercado"

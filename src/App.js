@@ -22,10 +22,10 @@ const App = () => {
       <BrowserRouter>
         <SnackbarProvider>
           <ThemeProvider theme={theme}>
-            <div className="min-vh-100 d-flex flex-column">
-              <div className="d-flex flex-grow-1 flex-column bg-gray">
-                <Disclaimer />
-                <div className="container py-3">
+            <div className="bg-gray">
+              <Disclaimer />
+              <div className="min-vh-100 container">
+                <div className="py-3">
                   <Header />
                   <Routes>
                     <PrivateRoute path="/" element={<Shop />}></PrivateRoute>

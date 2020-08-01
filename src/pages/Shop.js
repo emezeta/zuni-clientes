@@ -2,12 +2,14 @@ import React, { useRef, useState } from 'react'
 import { confirmAlert } from 'react-confirm-alert'
 import 'react-confirm-alert/src/react-confirm-alert.css'
 import Button from '@material-ui/core/Button'
+import Modal from '@material-ui/core/Modal'
 import { useSnackbar } from 'notistack'
 
 import useProducts from '../hooks/useProducts'
 import useDelivery from '../hooks/useDelivery'
 import useSubmit from '../hooks/useSubmit'
 import useScrollToError from '../hooks/useScrollToError'
+import useModal from '../hooks/useModal'
 
 import ConfirmationAlert from '../components/ConfirmationAlert'
 import Loader from '../components/Loader'
@@ -20,6 +22,7 @@ import Help from '../components/Help'
 const App = () => {
   const [loading, setLoading] = useState(false)
   const { enqueueSnackbar } = useSnackbar()
+  const { showModal, closeModal, modalVisible } = useModal()
 
   const {
     products,
@@ -82,34 +85,7 @@ const App = () => {
       return
     }
 
-    confirmAlert({
-      // eslint-disable-next-line react/display-name
-      customUI: ({ onClose }) => (
-        <OrderSummary
-          onCancel={onClose}
-          onConfirm={async () => {
-            setLoading(true)
-            if (await makeOrder({ products, ...delivery })) {
-              enqueueSnackbar('La orden fue recibida correctamente!', {
-                variant: 'success',
-              })
-              resetProducts()
-              resetDelivery()
-              setLoading(false)
-              onClose()
-            } else {
-              enqueueSnackbar('Hubo un error, por favor intente nuevamente', {
-                variant: 'error',
-              })
-              setLoading(false)
-              onClose()
-            }
-          }}
-          products={products}
-          delivery={delivery}
-        />
-      ),
-    })
+    showModal()
   }
 
   const handleReset = () => {
@@ -132,10 +108,38 @@ const App = () => {
 
   return (
     <>
-      <div className="row align-items-stretch">
-        <Help className="col-12 col-md-6 offset-md-3 mb-2" />
+      <Modal open={modalVisible} onClose={closeModal}>
+        <OrderSummary
+          className="container vh-100"
+          onCancel={closeModal}
+          onConfirm={async () => {
+            setLoading(true)
+            if (await makeOrder({ products, ...delivery })) {
+              enqueueSnackbar('La orden fue recibida correctamente!', {
+                variant: 'success',
+              })
+              resetProducts()
+              resetDelivery()
+              setLoading(false)
+              closeModal()
+            } else {
+              enqueueSnackbar('Hubo un error, por favor intente nuevamente', {
+                variant: 'error',
+              })
+              setLoading(false)
+              closeModal()
+            }
+          }}
+          products={products}
+          delivery={delivery}
+        />
+      </Modal>
+      <div className="row mb-2 justify-content-center">
+        <Help className="col-12 col-md-8 col-lg-6" />
+      </div>
+      <div className="mb-4 row justify-content-center">
         <DeliveryBox
-          className="col-12 col-md-6 offset-md-3 mb-4"
+          className="col-12 col-md-8 col-lg-6"
           errors={deliveryErrors}
           delivery={delivery}
           changePayment={changePayment}
@@ -143,7 +147,9 @@ const App = () => {
           changeDate={changeDate}
           changeNotes={changeNotes}
         />
-        <div className="col-12 col-md-6 offset-md-3 mb-2">
+      </div>
+      <div className="row mb-2 justify-content-center">
+        <div className="col-12 col-md-8 col-lg-6">
           {!!products.length && (
             <Button
               className="w-100"
@@ -167,9 +173,9 @@ const App = () => {
         </div>
       </div>
       {!!products.length && (
-        <div className="row mb-4">
+        <div className="row mt-4 mb-4">
           {products.map((product, index) => (
-            <div key={index} className="col-12 col-md-4">
+            <div key={index} className="col-12 col-md-6 col-lg-4">
               <ProductBox
                 errors={productErrors[index]}
                 product={product}
@@ -183,13 +189,14 @@ const App = () => {
           ))}
         </div>
       )}
-
-      <Footer
-        showSubmit={products.length}
-        disabled={loading}
-        newProduct={handleNewProduct}
-        submit={handleSubmit}
-      />
+      <div className="row justify-content-center">
+        <Footer
+          showSubmit={products.length}
+          disabled={loading}
+          newProduct={handleNewProduct}
+          submit={handleSubmit}
+        />
+      </div>
     </>
   )
 }

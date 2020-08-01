@@ -10,7 +10,7 @@ import TableRow from '@material-ui/core/TableRow'
 import TableContainer from '@material-ui/core/TableContainer'
 
 const DeliveryBox = ({ className, products }) => (
-  <div className={cn('px-4 pb-1 d-flex flex-column flex-grow-1', className)}>
+  <div className={cn('pb-1 d-flex flex-column flex-grow-1', className)}>
     <span className="align-self-center mb-2">Productos</span>
     <TableContainer className="max-vh-25 mb-4">
       <Table stickyHeader size="small" aria-label="a dense table">

@@ -25,7 +25,7 @@ const DeliveryBox = ({
   errors,
 }) => (
   <div className={className}>
-    <Card className="px-4 pb-4 pt-3 d-flex flex-column">
+    <Card className="px-4 pb-4 pt-3 d-flex flex-column w-100">
       <span className="align-self-center">Información de la entrega</span>
       <MuiPickersUtilsProvider utils={DateUtils}>
         <KeyboardDatePicker
