@@ -18,8 +18,10 @@ export default () => {
 
   useEffect(() => {
     try {
-      const payment = JSON.parse(window.localStorage.getItem('payment') || '{}')
-      const account = JSON.parse(window.localStorage.getItem('account') || '{}')
+      const rawPayment = window.localStorage.getItem('payment')
+      const rawAccount = window.localStorage.getItem('account')
+      const payment = rawPayment ? JSON.parse(rawPayment) : ''
+      const account = rawAccount ? JSON.parse(rawAccount) : ''
       setDelivery({ ...emptyDelivery, payment, account })
     } catch (err) {
       console.log(err)
@@ -48,6 +50,7 @@ export default () => {
 
   const validateDelivery = useCallback(() => {
     const newErrors = {}
+    console.log(delivery.payment)
     !delivery.deliveryDate && (newErrors.deliveryDate = true)
     !delivery.payment && (newErrors.payment = true)
     delivery.payment === 'account' &&
