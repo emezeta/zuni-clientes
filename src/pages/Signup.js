@@ -9,8 +9,8 @@ const Signup = () => {
   const { phone, changePhone, submit } = useSignup()
 
   return (
-    <div className="row">
-      <form onSubmit={submit} className="col col-md-6 offset-md-3">
+    <div className="row justify-content-center">
+      <form onSubmit={submit} className="col col-md-8 col-lg-6">
         <SignupBox phone={phone} changePhone={changePhone} errors={{}} />
         <Button
           variant="contained"

@@ -29,7 +29,7 @@ const OrderSummary = ({
     </DialogContent>
     <DialogActions>
       {onCancel && (
-        <Button onClick={onCancel} color="primary">
+        <Button onClick={onCancel} color="secondary">
           {cancelText}
         </Button>
       )}
@@ -39,7 +39,7 @@ const OrderSummary = ({
             onConfirm()
             onCancel()
           }}
-          color="primary"
+          color="secondary"
         >
           {confirmText}
         </Button>

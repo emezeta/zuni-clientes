@@ -1,6 +1,4 @@
 import React, { useRef, useState } from 'react'
-import { confirmAlert } from 'react-confirm-alert'
-import 'react-confirm-alert/src/react-confirm-alert.css'
 import Button from '@material-ui/core/Button'
 import Modal from '@material-ui/core/Modal'
 import { useSnackbar } from 'notistack'
@@ -22,7 +20,8 @@ import Help from '../components/Help'
 const App = () => {
   const [loading, setLoading] = useState(false)
   const { enqueueSnackbar } = useSnackbar()
-  const { showModal, closeModal, modalVisible } = useModal()
+  const [showSummary, hideSummary, summaryVisible] = useModal()
+  const [showReset, hideReset, resetVisible] = useModal()
 
   const {
     products,
@@ -72,46 +71,40 @@ const App = () => {
 
   const handleSubmit = async () => {
     if (!products.length) {
-      enqueueSnackbar('Agregue al menos un producto', { variant: 'warning' })
+      enqueueSnackbar('Agregue al menos un producto.', { variant: 'warning' })
       setLoading(false)
       return
     }
 
     if (!valid()) {
-      enqueueSnackbar('Hay campos requeridos sin completar', {
+      enqueueSnackbar('Hay campos requeridos sin completar.', {
         variant: 'warning',
       })
       setLoading(false)
       return
     }
 
-    showModal()
-  }
-
-  const handleReset = () => {
-    confirmAlert({
-      // eslint-disable-next-line react/display-name
-      customUI: ({ onClose }) => (
-        <ConfirmationAlert
-          title="Borrar todos los productos?"
-          cancelText="Cancelar"
-          confirmText="Borrar"
-          onCancel={onClose}
-          onConfirm={resetProducts}
-          description="Esta acción eliminará todos los productos de tu órden."
-        />
-      ),
-    })
+    showSummary()
   }
 
   if (loading) return <Loader />
 
   return (
     <>
-      <Modal open={modalVisible} onClose={closeModal}>
+      <Modal open={resetVisible} onClose={hideReset}>
+        <ConfirmationAlert
+          title="Borrar todos los productos?"
+          cancelText="Cancelar"
+          confirmText="Borrar"
+          onCancel={hideReset}
+          onConfirm={resetProducts}
+          description="Esta acción eliminará todos los productos de tu órden."
+        />
+      </Modal>
+      <Modal open={summaryVisible} onClose={hideSummary}>
         <OrderSummary
           className="container vh-100"
-          onCancel={closeModal}
+          onCancel={hideSummary}
           onConfirm={async () => {
             setLoading(true)
             if (await makeOrder({ products, ...delivery })) {
@@ -121,13 +114,13 @@ const App = () => {
               resetProducts()
               resetDelivery()
               setLoading(false)
-              closeModal()
+              hideSummary()
             } else {
               enqueueSnackbar('Hubo un error, por favor intente nuevamente', {
                 variant: 'error',
               })
               setLoading(false)
-              closeModal()
+              hideSummary()
             }
           }}
           products={products}
@@ -155,7 +148,7 @@ const App = () => {
               className="w-100"
               color="secondary"
               variant="outlined"
-              onClick={handleReset}
+              onClick={showReset}
             >
               Borrar productos
             </Button>

@@ -30,8 +30,8 @@ const Login = () => {
 
   return (
     <>
-      <div className="row">
-        <form onSubmit={submit} className="col col-md-6 offset-md-3">
+      <div className="row justify-content-center">
+        <form onSubmit={submit} className="col col-md-8 col-lg-6">
           <LoginBox
             login={{ phone, password }}
             changePhone={changePhone}
@@ -47,10 +47,10 @@ const Login = () => {
           </Button>
         </form>
       </div>
-      <div className="row mt-4">
-        <div className="col col-md-6 offset-md-3">
+      <div className="row mt-2">
+        <div className="col col-md-8 col-lg-6">
           <Link href="/signup">
-            <Button color="primary" className="col">
+            <Button color="secondary" className="col">
               Solicitar accesso
             </Button>
           </Link>
