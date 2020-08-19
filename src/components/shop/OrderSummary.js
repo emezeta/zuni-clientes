@@ -4,8 +4,8 @@ import cn from 'classnames'
 import Button from '@material-ui/core/Button'
 import Card from '@material-ui/core/Card'
 
-import DeliveryDisplay from './DeliveryDisplay'
-import ProductsTable from './ProductsTable'
+import DeliveryDisplay from 'components/shop/DeliveryDisplay'
+import ProductsTable from 'components/shop/ProductsTable'
 
 const OrderSummary = ({
   delivery,

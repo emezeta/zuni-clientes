@@ -3,7 +3,7 @@ import { default as MaterialTooltip } from '@material-ui/core/Tooltip'
 import { withStyles } from '@material-ui/core/styles'
 import HelpIcon from '@material-ui/icons/Help'
 
-import '../styles/tooltips.css'
+import 'styles/tooltips.css'
 
 const DarkerTooltip = withStyles((theme) => ({
   tooltip: {

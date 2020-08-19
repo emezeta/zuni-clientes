@@ -1,9 +1,9 @@
 import React from 'react'
 import Button from '@material-ui/core/Button'
 
-import useSignup from '../hooks/useSignup'
+import useSignup from 'hooks/useSignup'
 
-import SignupBox from '../components/SignupBox'
+import SignupBox from 'components/auth/SignupBox'
 
 const Signup = () => {
   const { phone, changePhone, submit } = useSignup()

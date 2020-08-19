@@ -1,6 +1,6 @@
 import React, { memo } from 'react'
 
-import logo from '../assets/header.png'
+import logo from 'assets/header.png'
 
 const Header = () => (
   <div className="row mb-4 justify-content-center">

@@ -3,9 +3,9 @@ import React from 'react'
 import Button from '@material-ui/core/Button'
 import { Modal } from '@material-ui/core'
 
-import useModal from '../hooks/useModal'
+import useModal from 'hooks/useModal'
 
-import ConfirmationAlert from '../components/ConfirmationAlert'
+import ConfirmationAlert from 'components/common/ConfirmationAlert'
 
 const TestingGuide = ({ className }) => {
   const [showHelp, hideHelp, helpVisible] = useModal()

@@ -3,11 +3,11 @@ import { useNavigate } from 'react-router-dom'
 import Button from '@material-ui/core/Button'
 import Link from '@material-ui/core/Link'
 
-import useSession from '../hooks/useSession'
-import useLogin from '../hooks/useLogin'
+import useSession from 'hooks/useSession'
+import useLogin from 'hooks/useLogin'
 
-import LoginBox from '../components/LoginBox'
-import Loader from '../components/Loader'
+import LoginBox from 'components/auth/LoginBox'
+import Loader from 'components/common/Loader'
 
 const Login = () => {
   const session = useSession()
@@ -47,7 +47,7 @@ const Login = () => {
           </Button>
         </form>
       </div>
-      <div className="row mt-2">
+      <div className="row justify-content-center mt-2">
         <div className="col col-md-8 col-lg-6">
           <Link href="/signup">
             <Button color="secondary" className="col">

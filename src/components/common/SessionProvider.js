@@ -1,7 +1,7 @@
 import React, { useEffect, createContext, useState, useCallback } from 'react'
 import jwtDecode from 'jwt-decode'
 
-import { SessionUpdateEvent, ACCESS_TOKEN } from '../constants'
+import { SessionUpdateEvent, ACCESS_TOKEN } from 'constants.js'
 
 export const SessionContext = createContext()
 

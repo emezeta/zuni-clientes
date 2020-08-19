@@ -1,6 +1,6 @@
 import React, { memo } from 'react'
 
-import Tooltip from './Tooltip'
+import Tooltip from 'components/common/Tooltip'
 
 const Disclaimer = () => (
   <div

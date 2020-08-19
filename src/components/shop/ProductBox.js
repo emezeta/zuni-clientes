@@ -7,8 +7,8 @@ import Card from '@material-ui/core/Card'
 import TextField from '@material-ui/core/TextField'
 import Delete from '@material-ui/icons/Delete'
 
-import useModal from '../hooks/useModal'
-import ConfirmationAlert from './ConfirmationAlert'
+import useModal from 'hooks/useModal'
+import ConfirmationAlert from 'components/common/ConfirmationAlert'
 
 const ProductBox = (
   { className, index, onDelete, product, onChange, errors },

@@ -1,6 +1,6 @@
 import { useState, useCallback, useEffect } from 'react'
 
-import { isEmpty } from '../helpers'
+import { isEmpty } from 'helpers'
 
 const emptyClient = {
   name: '',

@@ -10,7 +10,7 @@ import {
 } from '@material-ui/pickers'
 import DateUtils from '@date-io/dayjs'
 
-import Tooltip from './Tooltip'
+import Tooltip from 'components/common/Tooltip'
 
 const payment = {
   cash: 'Efectivo',

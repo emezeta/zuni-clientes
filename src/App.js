@@ -2,17 +2,17 @@ import React from 'react'
 import { Routes, Route, BrowserRouter } from 'react-router-dom'
 import { ThemeProvider } from '@material-ui/core/styles'
 import 'bootstrap/dist/css/bootstrap.min.css'
+import { SnackbarProvider } from 'notistack'
 
 import './App.css'
-import SessionProvider from './components/SessionProvider'
-import { SnackbarProvider } from 'notistack'
-import Login from './pages/Login'
-import Shop from './pages/Shop'
-import Signup from './pages/Signup'
+import SessionProvider from 'components/common/SessionProvider'
+import Login from 'pages/Login'
+import Shop from 'pages/Shop'
+import Signup from 'pages/Signup'
 
-import PrivateRoute from './components/PrivateRoute'
-import Disclaimer from './components/Disclaimer'
-import Header from './components/Header'
+import PrivateRoute from 'components/common/PrivateRoute'
+import Disclaimer from 'components/layout/Disclaimer'
+import Header from 'components/layout/Header'
 
 import theme from './theme'
 
@@ -22,7 +22,7 @@ const App = () => {
       <BrowserRouter>
         <SnackbarProvider>
           <ThemeProvider theme={theme}>
-            <div className="bg-gray">
+            <div id="background" className="bg-gray">
               <Disclaimer />
               <div className="min-vh-100 container">
                 <div className="py-3">

@@ -2,7 +2,7 @@ import { useState, useCallback, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useSnackbar } from 'notistack'
 
-import useSession from '../hooks/useSession'
+import useSession from 'hooks/useSession'
 
 export default () => {
   const [phone, changePhone] = useState('')
