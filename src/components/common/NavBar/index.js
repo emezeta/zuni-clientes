@@ -37,7 +37,7 @@ const NavBar = () => {
       <div className="fixed-top">
         <div
           ref={navBarRef}
-          className="bg-dark-blue d-flex justify-content-end py-2 px-3 px-md-5 py-m22"
+          className="bg-dark-blue d-flex justify-content-end py-2 px-3 px-md-5"
         >
           <a href="/" className="cursor-pointer mr-auto">
             <ShoppingCartIcon className="mr-2" style={{ color: 'white' }} />
