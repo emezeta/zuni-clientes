@@ -9,6 +9,8 @@ import SessionProvider from 'components/common/SessionProvider'
 import Login from 'pages/Login'
 import Shop from 'pages/Shop'
 import Signup from 'pages/Signup'
+import ChangePassword from 'pages/ChangePassword'
+import ForgotPassword from 'pages/ForgotPassword'
 
 import PrivateRoute from 'components/common/PrivateRoute'
 import Disclaimer from 'components/layout/Disclaimer'
@@ -22,13 +24,21 @@ const App = () => {
       <BrowserRouter>
         <SnackbarProvider>
           <ThemeProvider theme={theme}>
-            <div id="background" className="bg-gray">
+            <div className="bg-gray">
               <Disclaimer />
               <div className="min-vh-100 container">
                 <div className="py-3">
                   <Header />
                   <Routes>
                     <PrivateRoute path="/" element={<Shop />}></PrivateRoute>
+                    <PrivateRoute
+                      path="/change-password"
+                      element={<ChangePassword />}
+                    ></PrivateRoute>
+                    <Route
+                      path="/forgot-password"
+                      element={<ForgotPassword />}
+                    ></Route>
                     <Route path="/login" element={<Login />}></Route>
                     <Route path="/signup" element={<Signup />}></Route>
                   </Routes>

@@ -4,7 +4,7 @@ import mixpanel from 'mixpanel-browser'
 import useSession from 'hooks/useSession'
 
 const PrivateRoute = (props) => {
-  const session = useSession()
+  const [session] = useSession()
   const navigate = useNavigate()
 
   useEffect(() => {

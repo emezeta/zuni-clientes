@@ -29,8 +29,13 @@ const SessionProvider = ({ children }) => {
       window.removeEventListener(SessionUpdateEvent.type, updateSession)
   }, [updateSession])
 
+  const logout = useCallback(() => {
+    window.localStorage.removeItem(ACCESS_TOKEN)
+    setUserInfo()
+  }, [])
+
   return (
-    <SessionContext.Provider value={userInfo}>
+    <SessionContext.Provider value={[userInfo, logout]}>
       {children}
     </SessionContext.Provider>
   )

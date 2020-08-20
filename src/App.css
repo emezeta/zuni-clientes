@@ -1,6 +1,6 @@
-
-html, body, #root {
-  height: 100%;
+html,
+body,
+#root {
   overflow-x: hidden;
 }
 
@@ -9,13 +9,13 @@ html, body, #root {
 }
 
 .bg-gray {
-  background-color: rgb(240,240,240);
+  background-color: rgb(240, 240, 240);
 }
 
 .shadow {
-  -webkit-box-shadow: 10px 10px 37px 0px rgba(0,0,28,1);
-  -moz-box-shadow: 10px 10px 37px 0px rgba(0,0,28,1);
-  box-shadow: 10px 10px 37px 0px rgba(0,0,28,1);
+  -webkit-box-shadow: 10px 10px 37px 0px rgba(0, 0, 28, 1);
+  -moz-box-shadow: 10px 10px 37px 0px rgba(0, 0, 28, 1);
+  box-shadow: 10px 10px 37px 0px rgba(0, 0, 28, 1);
 }
 
 .opacity-2 {
@@ -23,19 +23,19 @@ html, body, #root {
 }
 
 .text-small {
-  font-size: .7rem;
+  font-size: 0.7rem;
 }
 
-.text-blue {
-  color: dodgerblue
-}
-
-.text-darkblue {
-  color: darkblue;
+.bg-dark-blue {
+  background-color: #000945;
 }
 
 .select-none {
   user-select: none;
+}
+
+.cursor-pointer {
+  cursor: pointer;
 }
 
 .shield {
@@ -47,7 +47,11 @@ html, body, #root {
   z-index: 1;
 }
 
+.text-transform-none {
+  text-transform: none;
+}
+
 .max-vh-25 {
   max-height: 25vh;
-  overflow: scroll
+  overflow: scroll;
 }

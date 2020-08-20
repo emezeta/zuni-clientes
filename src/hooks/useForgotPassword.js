@@ -1,52 +1,55 @@
-import { useState, useCallback, useEffect } from 'react'
+import { useState, useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
+import mixpanel from 'mixpanel-browser'
 import { useSnackbar } from 'notistack'
-
-import useSession from 'hooks/useSession'
 
 export default () => {
   const [phone, changePhone] = useState('')
+  const [loading, setLoading] = useState(false)
   const { enqueueSnackbar } = useSnackbar()
-
-  const [session] = useSession()
   const navigate = useNavigate()
-
-  useEffect(() => {
-    session && navigate('/')
-  }, [session, navigate])
 
   const submit = useCallback(
     async (e) => {
+      setLoading(true)
       e.preventDefault()
-      const body = JSON.stringify({ phone })
+      const body = JSON.stringify({
+        phone,
+      })
 
       try {
         const response = await fetch(
-          `${process.env.REACT_APP_API_URL}/auth/signup`,
+          `${process.env.REACT_APP_API_URL}/auth/forgot-password`,
           {
             method: 'POST',
             body,
           }
         )
+
         if (response.ok) {
-          enqueueSnackbar('Solicitud realizada con éxito', {
+          enqueueSnackbar('Recibirás un mensaje de texto', {
             variant: 'success',
           })
+          mixpanel.track('Change Password', { success: true })
           navigate('/login')
         }
 
+        setLoading(false)
         return response.ok
       } catch (err) {
         console.log(err)
+        mixpanel.track('Change Password', { success: false })
+        setLoading(false)
         return false
       }
     },
-    [phone, enqueueSnackbar, navigate]
+    [navigate, phone, enqueueSnackbar]
   )
 
   return {
     phone,
     changePhone,
     submit,
+    loading,
   }
 }

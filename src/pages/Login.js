@@ -10,7 +10,7 @@ import LoginBox from 'components/auth/LoginBox'
 import Loader from 'components/common/Loader'
 
 const Login = () => {
-  const session = useSession()
+  const [session] = useSession()
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -52,6 +52,11 @@ const Login = () => {
           <Link href="/signup">
             <Button color="secondary" className="col">
               Solicitar accesso
+            </Button>
+          </Link>
+          <Link href="/forgot-password">
+            <Button color="secondary" className="col">
+              Olvidé mi contraseña
             </Button>
           </Link>
         </div>

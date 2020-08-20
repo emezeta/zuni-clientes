@@ -11,6 +11,7 @@ import useModal from 'hooks/useModal'
 
 import ConfirmationAlert from 'components/common/ConfirmationAlert'
 import Loader from 'components/common/Loader'
+import NavBar from 'components/common/NavBar'
 import Footer from 'components/shop/Footer'
 import DeliveryBox from 'components/shop/DeliveryBox'
 import ProductBox from 'components/shop/ProductBox'
@@ -91,6 +92,7 @@ const App = () => {
 
   return (
     <>
+      <NavBar />
       <Modal open={resetVisible} onClose={hideReset}>
         <ConfirmationAlert
           title="Borrar todos los productos?"
