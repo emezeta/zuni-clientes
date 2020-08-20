@@ -1,5 +1,6 @@
 import React, { memo, forwardRef } from 'react'
 import cn from 'classnames'
+import { Link } from 'react-router-dom'
 
 import Card from '@material-ui/core/Card'
 import ExitToAppIcon from '@material-ui/icons/ExitToApp'
@@ -17,11 +18,9 @@ const DropDownMenu = ({ className, onChangePassword, onLogout }, ref) => (
       label="Cerrar sesión"
       icon={<ExitToAppIcon />}
     />
-    <DropDownItem
-      href="/change-password"
-      label="Cambiar contraseña"
-      icon={<VpnKeyIcon />}
-    />
+    <Link to="/change-password">
+      <DropDownItem label="Cambiar contraseña" icon={<VpnKeyIcon />} />
+    </Link>
   </Card>
 )
 
