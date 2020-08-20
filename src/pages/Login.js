@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import Button from '@material-ui/core/Button'
-import Link from '@material-ui/core/Link'
+import VisualLink from '@material-ui/core/Link'
 
 import useSession from 'hooks/useSession'
 import useLogin from 'hooks/useLogin'
@@ -49,15 +49,19 @@ const Login = () => {
       </div>
       <div className="row justify-content-center mt-2">
         <div className="col col-md-8 col-lg-6">
-          <Link href="/signup">
-            <Button color="secondary" className="col">
-              Solicitar accesso
-            </Button>
+          <Link to="/signup">
+            <VisualLink>
+              <Button color="secondary" className="col">
+                Solicitar accesso
+              </Button>
+            </VisualLink>
           </Link>
-          <Link href="/forgot-password">
-            <Button color="secondary" className="col">
-              Olvidé mi contraseña
-            </Button>
+          <Link to="/forgot-password">
+            <VisualLink>
+              <Button color="secondary" className="col">
+                Olvidé mi contraseña
+              </Button>
+            </VisualLink>
           </Link>
         </div>
       </div>
