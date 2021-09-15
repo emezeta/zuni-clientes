@@ -5,12 +5,9 @@ export default () =>
   useCallback(async (order) => {
     mixpanel.track('Order made')
 
-    window.localStorage.setItem('client', JSON.stringify(order.client))
     window.localStorage.setItem('lastOrder', JSON.stringify(order.products))
-    window.localStorage.setItem(
-      'payment',
-      JSON.stringify(order.delivery.payment)
-    )
+    window.localStorage.setItem('payment', JSON.stringify(order.payment))
+    window.localStorage.setItem('account', JSON.stringify(order.account))
     const body = JSON.stringify({
       ...order,
       date: new Date(),

@@ -1,12 +1,12 @@
 import { useState, useCallback, useEffect } from 'react'
 
-import { isEmpty } from '../helpers'
+import { isEmpty } from 'helpers'
 
 const in3hours = new Date()
 in3hours.setHours(in3hours.getHours() + 3)
 
 const emptyDelivery = {
-  date: in3hours,
+  deliveryDate: in3hours,
   payment: '',
   notes: '',
   account: '',
@@ -17,13 +17,21 @@ export default () => {
   const [deliveryErrors, setErrors] = useState({})
 
   useEffect(() => {
-    const payment = JSON.parse(window.localStorage.getItem('payment'))
-    payment && setDelivery({ ...emptyDelivery, payment })
+    try {
+      const rawPayment = window.localStorage.getItem('payment')
+      const rawAccount = window.localStorage.getItem('account')
+      const payment = rawPayment ? JSON.parse(rawPayment) : ''
+      const account = rawAccount ? JSON.parse(rawAccount) : ''
+      setDelivery({ ...emptyDelivery, payment, account })
+    } catch (err) {
+      console.log(err)
+    }
   }, [])
 
-  const changeDate = useCallback((date) => setDelivery({ ...delivery, date }), [
-    delivery,
-  ])
+  const changeDate = useCallback(
+    (deliveryDate) => setDelivery({ ...delivery, deliveryDate }),
+    [delivery]
+  )
 
   const changePayment = useCallback(
     (payment) => setDelivery({ ...delivery, payment }),
@@ -42,7 +50,8 @@ export default () => {
 
   const validateDelivery = useCallback(() => {
     const newErrors = {}
-    !delivery.date && (newErrors.date = true)
+    console.log(delivery.payment)
+    !delivery.deliveryDate && (newErrors.deliveryDate = true)
     !delivery.payment && (newErrors.payment = true)
     delivery.payment === 'account' &&
       !delivery.account &&

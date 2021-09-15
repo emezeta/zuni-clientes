@@ -1,8 +1,8 @@
 import React, { memo } from 'react'
-
 import cn from 'classnames'
 
 import TextField from '@material-ui/core/TextField'
+import Card from '@material-ui/core/Card'
 
 const ClientBox = ({
   className,
@@ -12,11 +12,8 @@ const ClientBox = ({
   changeAddress,
   errors,
 }) => (
-  <div
-    className={cn(
-      'bg-white rounded px-4 pb-4 pt-3 d-flex flex-column flex-grow-1 shadow',
-      className
-    )}
+  <Card
+    className={cn('px-4 pb-4 pt-3 d-flex flex-column flex-grow-1', className)}
   >
     <span className="align-self-center">Información del cliente</span>
     <TextField
@@ -41,7 +38,7 @@ const ClientBox = ({
       className="my-2"
       label="Dirección*"
     />
-  </div>
+  </Card>
 )
 
 export default memo(ClientBox)

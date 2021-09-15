@@ -1,0 +1,6 @@
+.drop-down-settings {
+  position: absolute;
+  right: 1rem;
+  top: -0.2rem;
+  z-index: 1030;
+}

@@ -1,7 +1,7 @@
 import { useState, useCallback } from 'react'
 import produce from 'immer'
-import { useAlert } from 'react-alert'
 import mixpanel from 'mixpanel-browser'
+import { useSnackbar } from 'notistack'
 
 const emptyProduct = {
   name: '',
@@ -12,7 +12,7 @@ const emptyProduct = {
 export default () => {
   const [products, setProducts] = useState([])
   const [productErrors, setErrors] = useState([])
-  const alert = useAlert()
+  const { enqueueSnackbar } = useSnackbar()
 
   const validateProducts = useCallback(() => {
     const newErrors = products.map(({ name, amount }) => {
@@ -35,12 +35,14 @@ export default () => {
 
   const newProduct = useCallback(() => {
     if (!validateProducts()) {
-      alert.show('Completa un producto antes de agregar otro')
+      enqueueSnackbar('Completa un producto antes de agregar otro', {
+        variant: 'warning',
+      })
       return
     }
     mixpanel.track('Product added')
     mutateProducts((draft) => void draft.push(emptyProduct))
-  }, [mutateProducts, validateProducts, alert])
+  }, [validateProducts, mutateProducts, enqueueSnackbar])
 
   const removeProduct = useCallback(
     (index) => {
@@ -60,8 +62,12 @@ export default () => {
 
   const repeatOrder = useCallback(() => {
     mixpanel.track('Repeat order')
-    const lastOrder = JSON.parse(window.localStorage.getItem('lastOrder'))
-    setProducts(lastOrder)
+    try {
+      const lastOrder = JSON.parse(window.localStorage.getItem('lastOrder'))
+      setProducts(lastOrder)
+    } catch (err) {
+      console.log(err)
+    }
   }, [])
 
   return {
